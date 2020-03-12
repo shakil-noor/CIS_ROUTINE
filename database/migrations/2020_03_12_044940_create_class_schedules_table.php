@@ -18,11 +18,14 @@ class CreateClassSchedulesTable extends Migration
             $table->string('day',15);
             $table->time('start_time');
             $table->time('end_time');
-            $table->string('course_code',20);
-            $table->integer('room_id');
-            $table->integer('teacher_id');
-            $table->integer('batch_schedule_id');
-            $table->integer('semester_id');
+            $table->unsignedBigInteger('course_id');
+            $table->foreign('course_id')->references('id')->on('courses');
+            $table->unsignedBigInteger('room_id');
+            $table->foreign('room_id')->references('id')->on('rooms');
+            $table->unsignedBigInteger('teacher_id');
+            $table->foreign('teacher_id')->references('id')->on('teachers');
+            $table->unsignedBigInteger('semester_id');
+            $table->foreign('semester_id')->references('id')->on('semesters');
             $table->timestamps();
         });
     }
