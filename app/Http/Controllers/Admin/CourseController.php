@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\Teacher;
+use App\Model\Course;
 use Illuminate\Http\Request;
 
-class TeacherController extends Controller
+class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $data['teachers'] = Teacher::orderBy('id','desc')->paginate(2);
-        return view('admin.teachers.index', $data);
+        $data['courses'] = Course::orderBy('id','desc')->paginate(5);
+        return view('admin.courses.index', $data);
     }
 
     /**
@@ -26,7 +26,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('admin.teachers.add');
+        return view('admin.courses.add');
     }
 
     /**
@@ -39,19 +39,17 @@ class TeacherController extends Controller
     {
         //dd($request->all());
         $request->validate([
-            'name' => 'required',
-            'designation' => 'required',
-            'email' => 'required|email|unique:teachers',
-            'username' => 'required|unique:teachers',
-            'password' => 'required|min:6',
+            'title' => 'required',
+            'short_name' => 'required',
+            'course_code' => 'required|unique:courses',
+            'course_type' => 'required',
+            'credit' => 'required',
         ]);
-        //store data into  data variable from request
+
         $data = $request->except('_token');
-        $data['password'] = bcrypt('password');
-        //insert or create new data into database
-        Teacher::create($data);
-        session()->flash('message','Teacher created successfully');
-        return redirect()->route('teacher.index');
+        Course::create($data);
+        session()->flash('message','Course created successfully');
+        return redirect()->route('course.index');
     }
 
     /**
@@ -73,8 +71,8 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
-        $data['teacher'] = Teacher::findOrFail($id);
-        return view('admin.teachers.edit',$data);
+        $data['course'] = Course::findOrFail($id);
+        return view('admin.courses.edit',$data);
     }
 
     /**
@@ -86,20 +84,19 @@ class TeacherController extends Controller
      */
     public function update(Request $request, $id)
     {
-         //dd($request->all());
         $request->validate([
-            'name' => 'required',
-            'designation' => 'required',
-            'email' => 'required|email',
-            'username' => 'required',
+            'title' => 'required',
+            'short_name' => 'required|max:10',
+            'course_code' => 'required|max:20',
+            'course_type' => 'required',
+            'credit' => 'required',
         ]);
         $data = $request->except('_token');
 
-        //update data into database
-        $teacher = Teacher::findOrFail($id);
-        $teacher->update($data);
-        session()->flash('message','Teacher updated successfully');
-        return redirect()->route('teacher.index');
+        $course = Course::findOrFail($id);
+        $course->update($data);
+        session()->flash('message','Course updated successfully');
+        return redirect()->route('course.index');
     }
 
     /**
@@ -110,8 +107,8 @@ class TeacherController extends Controller
      */
     public function destroy($id)
     {
-        Teacher::destroy($id);
-        session()->flash('message','Teacher deleted successfully');
+        Course::destroy($id);
+        session()->flash('message','Course delete successfully');
         return redirect()->back();
     }
 }

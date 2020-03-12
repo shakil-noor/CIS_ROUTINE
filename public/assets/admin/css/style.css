@@ -3413,6 +3413,13 @@ body.fixed-left .side-menu.left {
 body.fixed-left-void {
   min-height: 1024px;
 }
+
+//dev further custom
+.habijabi{
+  float: left;
+  margin-right: 10px;
+}
+
 /*
 File: Responsive
 */
@@ -3489,3 +3496,5 @@ File: Responsive
     display: none !important;
   }
 }
+
+

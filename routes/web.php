@@ -17,5 +17,9 @@ Route::get('/', function () {
 Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function (){
     Route::get('dashboard','DashboardController@dashboard')->name('admin.dashboard');
     Route::resource('teacher','TeacherController');
+    Route::resource('course','CourseController');
+    Route::resource('room','RoomController');
+    Route::resource('department','DepartmentController');
+    Route::resource('semester','SemesterController');
 });
 

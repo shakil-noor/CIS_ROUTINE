@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\Teacher;
+use App\Model\Room;
 use Illuminate\Http\Request;
 
-class TeacherController extends Controller
+class RoomController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $data['teachers'] = Teacher::orderBy('id','desc')->paginate(2);
-        return view('admin.teachers.index', $data);
+        $data['rooms'] = Room::orderBy('id','desc')->paginate(2);
+        return view('admin.rooms.index', $data);
     }
 
     /**
@@ -26,7 +26,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('admin.teachers.add');
+        return view('admin.rooms.add');
     }
 
     /**
@@ -39,19 +39,16 @@ class TeacherController extends Controller
     {
         //dd($request->all());
         $request->validate([
-            'name' => 'required',
-            'designation' => 'required',
-            'email' => 'required|email|unique:teachers',
-            'username' => 'required|unique:teachers',
-            'password' => 'required|min:6',
+            'room_type' => 'required',
+            'room_no' => 'required|max:10',
+            'capacity' => 'required|integer',
         ]);
-        //store data into  data variable from request
+
         $data = $request->except('_token');
-        $data['password'] = bcrypt('password');
         //insert or create new data into database
-        Teacher::create($data);
-        session()->flash('message','Teacher created successfully');
-        return redirect()->route('teacher.index');
+        Room::create($data);
+        session()->flash('message','Room created successfully');
+        return redirect()->route('room.index');
     }
 
     /**
@@ -73,8 +70,8 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
-        $data['teacher'] = Teacher::findOrFail($id);
-        return view('admin.teachers.edit',$data);
+        $data['room'] = Room::findOrFail($id);
+        return view('admin.rooms.edit',$data);
     }
 
     /**
@@ -86,20 +83,19 @@ class TeacherController extends Controller
      */
     public function update(Request $request, $id)
     {
-         //dd($request->all());
+        //dd($request->all());
         $request->validate([
-            'name' => 'required',
-            'designation' => 'required',
-            'email' => 'required|email',
-            'username' => 'required',
+            'room_type' => 'required',
+            'room_no' => 'required|max:10',
+            'capacity' => 'required|integer',
         ]);
         $data = $request->except('_token');
 
         //update data into database
-        $teacher = Teacher::findOrFail($id);
-        $teacher->update($data);
-        session()->flash('message','Teacher updated successfully');
-        return redirect()->route('teacher.index');
+        $room = Room::findOrFail($id);
+        $room->update($data);
+        session()->flash('message','Room updated successfully');
+        return redirect()->route('room.index');
     }
 
     /**
@@ -110,8 +106,8 @@ class TeacherController extends Controller
      */
     public function destroy($id)
     {
-        Teacher::destroy($id);
-        session()->flash('message','Teacher deleted successfully');
+        Room::destroy($id);
+        session()->flash('message','Room deleted successfully');
         return redirect()->back();
     }
 }

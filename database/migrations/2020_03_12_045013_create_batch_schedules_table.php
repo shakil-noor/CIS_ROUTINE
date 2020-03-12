@@ -16,9 +16,9 @@ class CreateBatchSchedulesTable extends Migration
         Schema::create('batch_schedules', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('batch_id');
-            $table->foreign('batch_id')->references('id')->on(' batches');
-            $table->integer('schedule_id');
-            $table->foreign('schedule_id')->references('id')->on('class_schedules');
+            $table->foreign('batch_id')->references('id')->on('batches')->onDelete('cascade');
+            $table->unsignedBigInteger('schedule_id');
+            $table->foreign('schedule_id')->references('id')->on('class_schedules')->onDelete('cascade');
             $table->timestamps();
         });
     }

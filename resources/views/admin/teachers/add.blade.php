@@ -26,8 +26,25 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label">Name</label>
                             <div class="col-md-10">
-                                <input type="text" value="{{ old('name') }}" name="name" class="form-control" placeholder="Name">
+                                <input type="text" value="{{ old('name') }}" name="name" class="form-control" placeholder="Name" required>
                                 @error('name')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Designation</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="designation">
+                                    <option>Select Designation</option>
+                                    <option value="Professor">Professor</option>
+                                    <option value="Associate Professor">Associate Professor</option>
+                                    <option value="Assistant Professor">Assistant Professor</option>
+                                    <option value="Sr. Lecturer">Sr. Lecturer</option>
+                                    <option value="Lecturer">Lecturer</option>
+                                </select>
+                                @error('designation')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -36,7 +53,7 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label">Email</label>
                             <div class="col-md-10">
-                                <input type="text" value="{{ old('email') }}" name="email" class="form-control" placeholder="Email">
+                                <input type="text" value="{{ old('email') }}" name="email" class="form-control" placeholder="Email" required>
                                 @error('email')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -44,10 +61,19 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-2 control-label">Phone</label>
+                            <label class="col-md-2 control-label">Username</label>
                             <div class="col-md-10">
-                                <input type="text" value="{{ old('phone') }}" name="phone" class="form-control" placeholder="Phone">
-                                @error('phone')
+                                <input type="text" value="{{ old('username') }}" name="username" class="form-control" placeholder="Username" required>
+                                @error('username')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Password</label>
+                            <div class="col-md-10">
+                                <input type="text" value="{{ old('password') }}" name="password" class="form-control" placeholder="Password" required>
+                                @error('password')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
