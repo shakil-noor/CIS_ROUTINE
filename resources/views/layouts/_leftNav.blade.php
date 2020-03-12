@@ -6,7 +6,7 @@
             </div>
             <div class="user-info">
                 <div class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Name</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Kenny Rigdon</a>
                     <ul class="dropdown-menu">
                         <li><a href="javascript:void(0)"> Profile</a></li>
                         <li><a href="javascript:void(0)"> Settings</a></li>
@@ -28,33 +28,40 @@
 
 
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i> <span> User(Admin) </span> <span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-files"></i><span> Teachers </span><span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
                     <ul class="list-unstyled">
-                        <li><a href="">List</a></li>
-                        <li><a href="">Create</a></li>
+                        <li><a href="pages-timeline.html">List</a></li>
+                        <li><a href="{{ route('teacher.create') }}">Create New</a></li>
+
                     </ul>
                 </li>
+
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i> <span> Vendor </span> <span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-files"></i><span> Subjects </span><span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
                     <ul class="list-unstyled">
-                        <li><a href="">List</a></li>
-                        <li><a href="">Create</a></li>
+                        <li><a href="pages-timeline.html">List</a></li>
+                        <li><a href="pages-invoice.html">Create New</a></li>
                     </ul>
                 </li>
+
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i> <span> Category </span> <span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-wand"></i> <span> Rooms </span> <span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
                     <ul class="list-unstyled">
-                        <li><a href="">List</a></li>
-                        <li><a href="">Create</a></li>
+                        <li><a href="icons-material.html">List</a></li>
+                        <li><a href="icons-ion.html">Create New</a></li>
                     </ul>
                 </li>
+
                 <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-agenda"></i> <span> Products </span> <span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-files"></i><span> Departments </span><span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
                     <ul class="list-unstyled">
-                        <li><a href="">List</a></li>
-                        <li><a href="">Create</a></li>
+                        <li><a href="pages-timeline.html">List</a></li>
+                        <li><a href="#">Create New</a></li>
+
                     </ul>
                 </li>
+
+
             </ul>
         </div>
         <div class="clearfix"></div>
