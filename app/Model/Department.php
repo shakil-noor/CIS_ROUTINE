@@ -9,4 +9,7 @@ class Department extends Model
     protected $fillable = [
         'name',
     ];
+    public function classSchedule(){
+        return $this->hasMany(ClassSchedule::class);
+    }
 }

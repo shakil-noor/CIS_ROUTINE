@@ -21,5 +21,9 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function (){
     Route::resource('room','RoomController');
     Route::resource('department','DepartmentController');
     Route::resource('semester','SemesterController');
+    Route::resource('batch','BatchController');
+
+    Route::resource('classSchedule','ClassScheduleController');
+    Route::get('scheduleRequest','ClassScheduleController@scheduleRequest')->name('scheduleRequest');
 });
 

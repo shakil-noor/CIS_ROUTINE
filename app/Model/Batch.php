@@ -4,10 +4,10 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Course extends Model
+class Batch extends Model
 {
     protected $fillable = [
-        'title','short_name','course_code','credit','course_type',
+        'name','num_of_std',
     ];
 
     public function classSchedule(){

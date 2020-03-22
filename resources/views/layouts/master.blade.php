@@ -41,6 +41,6 @@
 <!-- END wrapper -->
 
 @include('layouts._script')
-
+@yield('scheduleAjaxRequest')
 </body>
 </html>

@@ -23,7 +23,7 @@
         <div id="sidebar-menu">
             <ul>
                 <li>
-                    <a href="index.html" class="waves-effect"><i class="ti-home"></i><span> Dashboard </span></a>
+                    <a href="{{ route('admin.dashboard') }}" class="waves-effect"><i class="ti-home"></i><span> Dashboard </span></a>
                 </li>
 
 
@@ -66,6 +66,23 @@
                     <ul class="list-unstyled">
                         <li><a href="{{ route('semester.index') }}">List</a></li>
                         <li><a href="{{ route('semester.create') }}">Create New</a></li>
+
+                    </ul>
+                </li>
+
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-files"></i><span> Batch </span><span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ route('batch.index') }}">List</a></li>
+                        <li><a href="{{ route('batch.create') }}">Create New</a></li>
+                    </ul>
+                </li>
+
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-files"></i><span> Class Schedule </span><span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ route('classSchedule.index') }}">List</a></li>
+                        <li><a href="{{ route('classSchedule.create') }}">Create New</a></li>
 
                     </ul>
                 </li>
