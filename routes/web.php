@@ -24,6 +24,9 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function (){
     Route::resource('batch','BatchController');
 
     Route::resource('classSchedule','ClassScheduleController');
+    Route::get('teacherSchedule/{id}','ClassScheduleController@teacherSchedule')->name('teacherSchedule');
+    Route::get('batchSchedule/{id}','ClassScheduleController@batchSchedule')->name('batchSchedule');
+
     Route::get('scheduleRequest','ClassScheduleController@scheduleRequest')->name('scheduleRequest');
 });
 
