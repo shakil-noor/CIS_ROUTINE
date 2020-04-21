@@ -90,8 +90,8 @@ class TeacherController extends Controller
         $request->validate([
             'name' => 'required',
             'designation' => 'required',
-            'email' => 'required|email',
-            'username' => 'required',
+            'email' => 'required|email|unique',
+            'username' => 'required|max:30',
         ]);
         $data = $request->except('_token');
 

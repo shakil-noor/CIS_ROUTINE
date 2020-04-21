@@ -14,7 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function (){
+
+Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'auth'],function (){
     Route::get('dashboard','DashboardController@dashboard')->name('admin.dashboard');
     Route::resource('teacher','TeacherController');
     Route::resource('course','CourseController');
@@ -28,5 +29,11 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin'],function (){
     Route::get('batchSchedule/{id}','ClassScheduleController@batchSchedule')->name('batchSchedule');
 
     Route::get('scheduleRequest','ClassScheduleController@scheduleRequest')->name('scheduleRequest');
+
+    Route::get('teacherSchedulePDF/{id}','PDFController@teacherSchedulePDF')->name('teacherSchedulePDF');;
 });
 
+
+Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');

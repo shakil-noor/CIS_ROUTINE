@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>document.getElementsByTagName("html")[0].className += " js";</script>
-    <link href="{{ asset('assets/schedule/css/style.css') }}" rel="stylesheet" type="text/css">
-    {{-- <link href="https://codyhouse.co/demo/schedule-template/assets/css/style.css" rel="stylesheet" type="text/css"> --}}
-
+    <!-- <link href="{{ asset('assets/schedule/css/style.css') }}" rel="stylesheet" type="text/css"> -->
+    {{--<link href="https://codyhouse.co/demo/schedule-template/assets/css/style.css" rel="stylesheet" type="text/css">--}}
     <title>CIS-Class Routine-{{ $teacher->name }}</title>
 </head>
 <body>
 <div id="printableArea">
 <header class="cd-main-header text-center flex flex-column flex-center">
+
     <h1 class="text-xl">Class Schedule of {{ $teacher->name }}</h1>
-    {{--<button onclick="window.print()">Print</button>--}}
+
     <input type="button" onclick="printDiv('printableArea')" value="print a div!" />
 </header>
 
@@ -174,8 +174,6 @@
         document.body.innerHTML = originalContents;
     }
 </script>
-{{--<script src="assets/js/util.js"></script> <!-- util functions included in the CodyHouse framework -->--}}
-{{--<script src="assets/js/main.js"></script>--}}
 <script src="{{ asset('assets/schedule/js/util.js')}}"></script>
 <script src="{{ asset('assets/schedule/js/main.js')}}"></script>
 </body>

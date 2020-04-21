@@ -116,6 +116,7 @@
         </div> <!-- col -->
     </div> <!-- End row -->
 @endsection
+
 @section('scheduleAjaxRequest')
     <script>
         $(document).ready(function(){

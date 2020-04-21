@@ -17,8 +17,8 @@ class CreateTeachersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name',50);
             $table->string('designation',40);
-            $table->string('email',80);
-            $table->string('username',30);
+            $table->string('email',80)->unique();
+            $table->string('username',30)->unique();
             $table->string('password');
             $table->timestamps();
         });

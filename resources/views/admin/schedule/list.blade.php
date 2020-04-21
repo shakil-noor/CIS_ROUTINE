@@ -28,7 +28,7 @@
                         <div class="panel-body">
                             {{ $T->name }} =
                             <a type="button" href="{{ route('teacherSchedule', $T->id) }}" class="btn btn-primary">View</a>
-                            <a type="button" href="{{ route('teacherSchedule', $T->id) }}" class="btn btn-info">PDF</a>
+                            <a type="button" href="{{ route('teacherSchedulePDF', $T->id) }}" class="btn btn-info">PDF</a>
 
                             {{-- <input type="button" class="btn btn-primary" name="teacherPDF" value="PDF"> --}}
                         </div>

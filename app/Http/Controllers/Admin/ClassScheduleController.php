@@ -24,16 +24,14 @@ class ClassScheduleController extends Controller
     }
 
     public function teacherSchedule($id){
-        //echo $id;
-        //$data['classSchedules'] = ClassSchedule::orderBy('day','ASC')->get();
-        //$data['classSchedules'] = ClassSchedule::orderBy('start_time','ASC')->where('day','=','saturday')->paginate(5);
+        $data['teacher'] = Teacher::findOrFail($id);
         $data['saturday'] = ClassSchedule::orderBy('start_time','ASC')->where([['day','=','saturday'],['teacher_id','=', $id]])->get();
         $data['sunday'] = ClassSchedule::orderBy('start_time','ASC')->where([['day','=','sunday'],['teacher_id', '=', $id]])->get();
         $data['monday'] = ClassSchedule::orderBy('start_time','ASC')->where([['day','=','monday'],['teacher_id', '=',$id]])->get();
         $data['tuesday'] = ClassSchedule::orderBy('start_time','ASC')->where([['day','=','monday'],['teacher_id', '=', $id]])->get();
         $data['wednesday'] = ClassSchedule::orderBy('start_time','ASC')->where([['day','=','wednesday'],['teacher_id', '=',$id]])->get();
         $data['thursday'] = ClassSchedule::orderBy('start_time','ASC')->where([['day','=','thursday'],['teacher_id', '=', $id]])->get();
-        //$data['classSchedules'] = ClassSchedule::findOrFail($id);;
+
         return view('admin.schedule.teacherSchedule',$data);
     }
     public function batchSchedule(){
