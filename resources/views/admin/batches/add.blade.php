@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.admins.master')
 @section('title','New batch create')
 @section('content')
     <!-- Page-Title or brad-cum-->
@@ -38,6 +38,20 @@
                             <div class="col-md-10">
                                 <input type="number" value="{{ old('num_of_std') }}" name="num_of_std" class="form-control" placeholder="Number Of Student" required>
                                 @error('num_of_std')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Department</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="day" id="day">
+                                    <option value="">Select Day</option>
+                                    @foreach($departments as $department)
+                                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                        @endforeach
+                                </select>
+                                @error('course_type')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

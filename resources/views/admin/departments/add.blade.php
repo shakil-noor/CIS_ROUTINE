@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.admins.master')
 @section('title','New Teacher create')
 @section('content')
     <!-- Page-Title or brad-cum-->

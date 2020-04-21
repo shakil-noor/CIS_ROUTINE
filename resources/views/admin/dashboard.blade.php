@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.admins.master')
 @section('datatablecss')
     <!-- DataTables -->
     <link href="{{ asset('assets/admin/plugins/datatables/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css" />

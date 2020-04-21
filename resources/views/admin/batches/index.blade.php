@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.admins.master')
 @section('title','Batches List')
 @section('content')
     <!-- Page-Title or brad-cum-->
@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-    @include("layouts._message")
+    @include("layouts.admins._message")
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-primary">

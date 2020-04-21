@@ -12,4 +12,7 @@ class Department extends Model
     public function classSchedule(){
         return $this->hasMany(ClassSchedule::class);
     }
+    public function batches(){
+        return $this->hasMany(Batch::class);
+    }
 }

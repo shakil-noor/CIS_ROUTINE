@@ -1,6 +1,5 @@
-@extends('layouts.master')
-{{--<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>--}}
-@section('title','New Teacher create')
+@extends('layouts.admins.master')
+@section('title','New Schedule create')
 @section('content')
     <!-- Page-Title or brad-cum-->
     <div class="row">
@@ -132,7 +131,7 @@
 
                         $.ajax({
                             type:'GET',
-                            url: '{{route('scheduleRequest')}}',
+                            url: '{{route('admin.scheduleRequest')}}',
                             data: {day:day, start_time:start_time,end_time:end_time},
                             dataType: 'json',
                             success:function(responce){

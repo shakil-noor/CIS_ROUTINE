@@ -26,6 +26,8 @@ class CreateClassSchedulesTable extends Migration
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
             $table->unsignedBigInteger('semester_id');
             $table->foreign('semester_id')->references('id')->on('semesters')->onDelete('cascade');
+            $table->unsignedBigInteger('department_id');
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
             $table->timestamps();
         });
     }

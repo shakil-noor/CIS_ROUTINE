@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\Batch;
+use App\Model\Department;
 use Illuminate\Http\Request;
 
 class BatchController extends Controller
@@ -26,7 +27,8 @@ class BatchController extends Controller
      */
     public function create()
     {
-        return view('admin.batches.add');
+        $data['departments'] = Department::orderBy('id','ASC')->get();
+        return view('admin.batches.add',$data);
     }
 
     /**
@@ -40,6 +42,7 @@ class BatchController extends Controller
         $request->validate([
             'name' => 'required',
             'num_of_std' => 'required|integer',
+            'department_id' => 'required|integer',
         ]);
 
         $data = $request->except('_token');

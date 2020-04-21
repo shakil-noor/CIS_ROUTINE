@@ -27,13 +27,21 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'auth'],fun
     Route::resource('classSchedule','ClassScheduleController');
     Route::get('teacherSchedule/{id}','ClassScheduleController@teacherSchedule')->name('teacherSchedule');
     Route::get('batchSchedule/{id}','ClassScheduleController@batchSchedule')->name('batchSchedule');
-
-    Route::get('scheduleRequest','ClassScheduleController@scheduleRequest')->name('scheduleRequest');
+    Route::get('scheduleRequest','ClassScheduleController@scheduleRequest')->name('admin.scheduleRequest');
 
     Route::get('teacherSchedulePDF/{id}','PDFController@teacherSchedulePDF')->name('teacherSchedulePDF');;
 });
 
-
 Auth::routes();
 
+Route::group(['prefix'=>'teacher', 'namespace'=>'Teacher'],function (){
+    Route::resource('profile','ProfileController');
+    Route::get('schedules','ScheduleController@index')->name('teacher.schedule.index');
+    Route::get('scheduleView','ScheduleController@view')->name('teacher.schedule.view');
+});
+
+Route::group(['prefix'=>'coordinator', 'namespace'=>'Coordinator'],function (){
+    Route::resource('schedule','ScheduleController');
+    Route::get('scheduleRequest','ScheduleController@scheduleRequest')->name('coordinator.scheduleRequest');
+});
 //Route::get('/home', 'HomeController@index')->name('home');
