@@ -2,23 +2,17 @@
 
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
-class Teacher extends Authenticatable
+use Illuminate\Notifications\Notifiable;
+class Coordinator extends Authenticatable
 {
     use Notifiable;
 
+
     protected $fillable = [
-        'name','designation','email','username','password',
+        'name','department_id','email','username','password',
     ];
-    public function classSchedule(){
-        return $this->hasMany(ClassSchedule::class);
-    }
-
-
-
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -36,4 +30,8 @@ class Teacher extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function department(){
+       return $this->belongsTo(Department::class,'department_id');
+    }
 }

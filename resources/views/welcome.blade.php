@@ -29,8 +29,8 @@
         </h3>
 
         <a class="btn btn-primary btn-xl js-scroll-trigger" href="{{ route('login') }}">Admin</a>
-        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Coordinator</a>
-        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Teacher</a>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" href="{{ route('teacher.showLogin') }}">Teacher</a>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" href="{{ route('coordinator.showLogin') }}">Coordinator</a>
         <h4 class="mb-5">
             <em>Powered by Department of CIS</em>
         </h4>

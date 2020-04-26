@@ -47,7 +47,7 @@ class TeacherController extends Controller
         ]);
         //store data into  data variable from request
         $data = $request->except('_token');
-        $data['password'] = bcrypt('password');
+        $data['password'] = bcrypt($request->password);
         //insert or create new data into database
         Teacher::create($data);
         session()->flash('message','Teacher created successfully');

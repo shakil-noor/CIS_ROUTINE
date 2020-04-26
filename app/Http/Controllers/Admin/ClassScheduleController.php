@@ -18,7 +18,7 @@ class ClassScheduleController extends Controller
      */
     public function index()
     {
-        $data['batches'] = Batch::orderBy('id','ASC')->get();
+        $data['batches'] = Batch::orderBy('id','DESC')->get();
         $data['teachers'] = Teacher::orderBy('id','desc')->get();
         return view('admin.schedule.list',$data);
     }

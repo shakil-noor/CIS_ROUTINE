@@ -13,18 +13,27 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
-Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'auth'],function (){
+Auth::routes();
+Route::get('/login/teacher', 'Auth\LoginController@showTeacherLoginForm')->name('teacher.showLogin');
+Route::post('/login/teacher', 'Auth\LoginController@teacherLogin');
+
+Route::get('/login/coordinator', 'Auth\LoginController@showCoordinatorLoginForm')->name('coordinator.showLogin');
+Route::post('/login/coordinator', 'Auth\LoginController@coordinatorLogin');
+
+//Admin
+Route::group(['middleware' =>'auth','prefix'=>'admin', 'namespace'=>'Admin'],function (){
     Route::get('dashboard','DashboardController@dashboard')->name('admin.dashboard');
     Route::resource('teacher','TeacherController');
+    Route::resource('coordinator','CoordinatorController');
     Route::resource('course','CourseController');
     Route::resource('room','RoomController');
     Route::resource('department','DepartmentController');
     Route::resource('semester','SemesterController');
     Route::resource('batch','BatchController');
-
     Route::resource('classSchedule','ClassScheduleController');
+
     Route::get('teacherSchedule/{id}','ClassScheduleController@teacherSchedule')->name('teacherSchedule');
     Route::get('batchSchedule/{id}','ClassScheduleController@batchSchedule')->name('batchSchedule');
     Route::get('scheduleRequest','ClassScheduleController@scheduleRequest')->name('admin.scheduleRequest');
@@ -32,16 +41,18 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'auth'],fun
     Route::get('teacherSchedulePDF/{id}','PDFController@teacherSchedulePDF')->name('teacherSchedulePDF');;
 });
 
-Auth::routes();
-
-Route::group(['prefix'=>'teacher', 'namespace'=>'Teacher'],function (){
-    Route::resource('profile','ProfileController');
+//Teacher
+Route::group(['middleware' =>'auth:teacher','prefix'=>'teacher', 'namespace'=>'Teacher'],function (){
+    Route::get('dashboard','DashboardController@dashboard')->name('teacher.dashboard');
+    Route::resource('teacherProfile','ProfileController');
     Route::get('schedules','ScheduleController@index')->name('teacher.schedule.index');
     Route::get('scheduleView','ScheduleController@view')->name('teacher.schedule.view');
 });
 
-Route::group(['prefix'=>'coordinator', 'namespace'=>'Coordinator'],function (){
+//Coordinator
+Route::group(['middleware' =>'auth:coordinator','prefix'=>'coordinator', 'namespace'=>'Coordinator'],function (){
+    Route::get('dashboard','DashboardController@dashboard')->name('coordinator.dashboard');
     Route::resource('schedule','ScheduleController');
     Route::get('scheduleRequest','ScheduleController@scheduleRequest')->name('coordinator.scheduleRequest');
 });
-//Route::get('/home', 'HomeController@index')->name('home');
+

@@ -15,7 +15,6 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //$data['profiles'] = Teacher::orderBy('id','ASC')->paginate(5);
         return view('teachers.profile.index');
     }
 
@@ -71,7 +70,19 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd($request);
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:teachers,email,'.$id,
+            'username' => 'required|unique:teachers,username,'.$id,
+        ]);
+
+        $data = $request->except('_token');
+
+        $batch = Teacher::findOrFail($id);
+        $batch->update($data);
+        session()->flash('message','Teacher updated successfully');
+        return redirect()->route('teacherProfile.index');
     }
 
     /**

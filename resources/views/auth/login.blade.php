@@ -30,7 +30,11 @@
             </h3>
             <h4 class="text-muted text-center m-t-0"><b>Sign In</b></h4>
 
-            <form class="form-horizontal m-t-20" action="{{ url('login') }}" method="post" >
+                @isset($url)
+                <form method="POST" class="form-horizontal m-t-20" action='{{ url("login/$url") }}' aria-label="{{ __('Login') }}">
+                        @else
+                            <form method="POST" class="form-horizontal m-t-20" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+                @endisset
                 @csrf
                 <div class="form-group">
                     <div class="col-xs-12">
@@ -56,16 +60,7 @@
                 </span>
                 @enderror
 
-                <div class="form-group">
-                    <div class="col-xs-12">
-                        <div class="checkbox checkbox-primary">
-                            <input id="checkbox-signup" name="remember" type="checkbox">
-                            <label for="checkbox-signup">
-                                Remember me
-                            </label>
-                        </div>
-                    </div>
-                </div>
+               <br>
 
                 <div class="form-group text-center m-t-20">
                     <div class="col-xs-12">
@@ -75,7 +70,7 @@
 
                 <div class="form-group m-t-30 m-b-0">
                     <div class="col-sm-7">
-                        <a href="#" class="text-muted"><i class="fa fa-lock m-r-5"></i> Forgot your password?</a>
+                        <a href="{{ route('home') }}" class="text-muted"><i class="fa fa-arrow-circle-o-left m-r-5"></i> Back to Home</a>
                     </div>
 
                 </div>

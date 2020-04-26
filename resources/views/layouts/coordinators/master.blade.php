@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    @include('layouts._head')
+    @include('layouts.coordinators._head')
 </head>
 
 
@@ -11,12 +11,12 @@
 <div id="wrapper">
 
     <!-- Top Bar Start -->
-@include('layouts._topNav')
+@include('layouts.coordinators._topNav')
 <!-- Top Bar End -->
 
 
     <!-- ========== Left Sidebar Start ========== -->
-@include('layouts._leftNav')
+@include('layouts.coordinators._leftNav')
 <!-- Left Sidebar End -->
 
     <!-- Start right Content here -->
@@ -32,7 +32,7 @@
 
         </div> <!-- content -->
 
-        @include('layouts._footer')
+        @include('layouts.coordinators._footer')
 
     </div>
     <!-- End Right content here -->
@@ -40,7 +40,7 @@
 </div>
 <!-- END wrapper -->
 
-@include('layouts._script')
+@include('layouts.coordinators._script')
 @yield('scheduleAjaxRequest')
 </body>
 </html>

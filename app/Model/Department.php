@@ -15,4 +15,8 @@ class Department extends Model
     public function batches(){
         return $this->hasMany(Batch::class);
     }
+
+    public function coordinators(){
+        return $this->hasMany(Coordinator::class,'department_id');
+    }
 }

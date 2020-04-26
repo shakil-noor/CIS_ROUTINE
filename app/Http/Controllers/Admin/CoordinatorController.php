@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\Batch;
+use App\Model\Coordinator;
 use App\Model\Department;
 use Illuminate\Http\Request;
 
-class BatchController extends Controller
+class CoordinatorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class BatchController extends Controller
      */
     public function index()
     {
-        $data['batches'] = Batch::orderBy('id','ASC')->paginate(5);
-        return view('admin.batches.index', $data);
+        $data['coordinators'] = Coordinator::with('department')->orderBy('id','desc')->paginate(10);
+        return view('admin.coordinators.index', $data);
     }
 
     /**
@@ -27,8 +27,8 @@ class BatchController extends Controller
      */
     public function create()
     {
-        $data['departments'] = Department::orderBy('id','ASC')->get();
-        return view('admin.batches.add',$data);
+        $data['departments'] = Department::all();
+        return view('admin.coordinators.add',$data);
     }
 
     /**
@@ -41,15 +41,19 @@ class BatchController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'num_of_std' => 'required|integer',
-            'department_id' => 'required|integer',
+            'department_id' => 'required',
+            'email' => 'required|email|unique:teachers',
+            'username' => 'required|unique:teachers',
+            'password' => 'required|min:6',
         ]);
 
+        //store data into  data variable from request
         $data = $request->except('_token');
-        //dd($data);
-        Batch::create($data);
-        session()->flash('message','Batch created successfully');
-        return redirect()->route('batch.index');
+        $data['password'] = bcrypt($request->password);
+        //insert or create new data into database
+        Coordinator::create($data);
+        session()->flash('message','Coordinator created successfully');
+        return redirect()->route('coordinator.index');
     }
 
     /**
@@ -71,8 +75,9 @@ class BatchController extends Controller
      */
     public function edit($id)
     {
-        $data['batch'] = Batch::findOrFail($id);
-        return view('admin.batches.edit',$data);
+        $data['departments'] = Department::all();
+        $data['coordinator'] = Coordinator::findOrFail($id) ;
+        return view('admin.coordinators.edit',$data);
     }
 
     /**
@@ -86,16 +91,17 @@ class BatchController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'num_of_std' => 'required|integer',
-            'department_id' => 'required|integer',
+            'department_id' => 'required',
+            'email' => 'required|email',
+            'username' => 'required|max:30',
         ]);
-
         $data = $request->except('_token');
 
-        $batch = Batch::findOrFail($id);
-        $batch->update($data);
-        session()->flash('message','Batch updated successfully');
-        return redirect()->route('batch.index');
+        //update data into database
+        $teacher = Coordinator::findOrFail($id);
+        $teacher->update($data);
+        session()->flash('message','Coordinator updated successfully');
+        return redirect()->route('coordinator.index');
     }
 
     /**
@@ -106,6 +112,8 @@ class BatchController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Coordinator::destroy($id);
+        session()->flash('message','Coordinator deleted successfully');
+        return redirect()->back();
     }
 }
