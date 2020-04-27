@@ -86,7 +86,7 @@ class RoomController extends Controller
         //dd($request->all());
         $request->validate([
             'room_type' => 'required',
-            'room_no' => 'required|max:10',
+            'room_no' => 'required|max:10|unique:rooms,room_no,'.$id,
             'capacity' => 'required|integer',
         ]);
         $data = $request->except('_token');

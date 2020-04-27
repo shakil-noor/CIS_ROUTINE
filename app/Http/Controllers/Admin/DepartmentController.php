@@ -39,7 +39,7 @@ class DepartmentController extends Controller
     {
         //dd($request->all());
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:departments',
         ]);
         //store data into  data variable from request
         $data = $request->except('_token');
@@ -83,7 +83,7 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:departments,name,'.$id,
         ]);
         $data = $request->except('_token');
 

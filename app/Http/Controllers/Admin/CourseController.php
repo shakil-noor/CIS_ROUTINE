@@ -85,9 +85,9 @@ class CourseController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|unique:courses',
-            'short_name' => 'required|max:10|unique:courses',
-            'course_code' => 'required|max:20|unique:courses',
+            'title' => 'required|unique:courses,title,'.$id,
+            'short_name' => 'required|max:10|unique:courses,short_name,'.$id,
+            'course_code' => 'required|max:20|unique:courses,course_code,'.$id,
             'course_type' => 'required',
             'credit' => 'required',
         ]);

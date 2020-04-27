@@ -39,7 +39,7 @@ class SemesterController extends Controller
     {
         //dd($request->all());
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:semesters',
         ]);
         //store data into  data variable from request
         $data = $request->except('_token');
@@ -83,7 +83,7 @@ class SemesterController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:semesters,name,'.$id,
         ]);
         $data = $request->except('_token');
 
