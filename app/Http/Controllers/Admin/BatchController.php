@@ -39,8 +39,9 @@ class BatchController extends Controller
      */
     public function store(Request $request)
     {
+//        dd($request);
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:batches',
             'num_of_std' => 'required|integer',
             'department_id' => 'required|integer',
         ]);
@@ -71,6 +72,7 @@ class BatchController extends Controller
      */
     public function edit($id)
     {
+        $data['departments'] = Department::orderBy('id','ASC')->get();
         $data['batch'] = Batch::findOrFail($id);
         return view('admin.batches.edit',$data);
     }
@@ -106,6 +108,8 @@ class BatchController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Batch::destroy($id);
+        session()->flash('message','Batch deleted successfully');
+        return redirect()->back();
     }
 }

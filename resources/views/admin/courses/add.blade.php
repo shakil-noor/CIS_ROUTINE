@@ -58,8 +58,8 @@
                             <div class="col-sm-10">
                                 <select class="form-control" name="course_type">
                                     <option>Select Course Type</option>
-                                    <option value="Theory">Theory</option>
-                                    <option value="Lab">Lab</option>
+                                    <option @if(old('course_type')=='Theory')selected @endif value="Theory">Theory</option>
+                                    <option @if(old('course_type')=='Lab')selected @endif value="Lab">Lab</option>
                                 </select>
                                 @error('course_type')
                                 <div class="text-danger">{{ $message }}</div>
@@ -72,12 +72,12 @@
                             <div class="col-sm-10">
                                 <select class="form-control" name="credit">
                                     <option>Select Credit</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
+                                    <option @if(old('credit')=='1')selected @endif value="1">1</option>
+                                    <option @if(old('credit')=='2')selected @endif value="2">2</option>
+                                    <option @if(old('credit')=='3')selected @endif value="3">3</option>
+                                    <option @if(old('credit')=='4')selected @endif value="4">4</option>
+                                    <option @if(old('credit')=='5')selected @endif value="5">5</option>
+                                    <option @if(old('credit')=='6')selected @endif value="6">6</option>
                                 </select>
                                 @error('credit')
                                 <div class="text-danger">{{ $message }}</div>

@@ -28,8 +28,8 @@
                             <div class="col-sm-10">
                                 <select class="form-control" name="room_type">
                                     <option value="">Select Room Type</option>
-                                    <option value="Theory">Theory</option>
-                                    <option value="Lab">Lab</option>
+                                    <option @if(old('room_type')=='Theory')selected @endif value="Theory">Theory</option>
+                                    <option @if(old('room_type')=='Lab')selected @endif value="Lab">Lab</option>
                                 </select>
                                 @error('room_type')
                                 <div class="text-danger">{{ $message }}</div>

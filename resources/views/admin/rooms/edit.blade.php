@@ -28,9 +28,9 @@
                             <label class="col-sm-2 control-label">Room Type</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="room_type">
-                                    <option value="">Select Room Type</option>
-                                    <option value="Theory">Theory</option>
-                                    <option value="Lab">Lab</option>
+                                    <option value="">Select Course Type</option>
+                                    <option @if(isset($room->room_type)=='Theory') selected @endif @if(old('room_type')=='Theory')selected @endif value="Theory">Theory</option>
+                                    <option @if(isset($room->room_type)=='Lab') selected @endif @if(old('room_type')=='Lab')selected @endif value="Lab">Lab</option>
                                 </select>
                                 @error('room_type')
                                 <div class="text-danger">{{ $message }}</div>

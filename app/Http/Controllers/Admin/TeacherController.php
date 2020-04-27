@@ -42,7 +42,7 @@ class TeacherController extends Controller
             'name' => 'required',
             'designation' => 'required',
             'email' => 'required|email|unique:teachers',
-            'username' => 'required|unique:teachers',
+            'username' => 'required|max:30|unique:teachers',
             'password' => 'required|min:6',
         ]);
         //store data into  data variable from request
@@ -90,8 +90,8 @@ class TeacherController extends Controller
         $request->validate([
             'name' => 'required',
             'designation' => 'required',
-            'email' => 'required|email|unique',
-            'username' => 'required|max:30',
+            'email' => 'required|email|unique:teachers',
+            'username' => 'required|max:30|unique:teachers',
         ]);
         $data = $request->except('_token');
 

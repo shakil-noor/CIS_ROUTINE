@@ -39,9 +39,9 @@ class CourseController extends Controller
     {
         //dd($request->all());
         $request->validate([
-            'title' => 'required',
-            'short_name' => 'required',
-            'course_code' => 'required|unique:courses',
+            'title' => 'required|unique:courses',
+            'short_name' => 'required|max:10|unique:courses',
+            'course_code' => 'required|max:20|unique:courses',
             'course_type' => 'required',
             'credit' => 'required',
         ]);
@@ -85,13 +85,14 @@ class CourseController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required',
-            'short_name' => 'required|max:10',
-            'course_code' => 'required|max:20',
+            'title' => 'required|unique:courses',
+            'short_name' => 'required|max:10|unique:courses',
+            'course_code' => 'required|max:20|unique:courses',
             'course_type' => 'required',
             'credit' => 'required',
         ]);
         $data = $request->except('_token');
+        $data['title'] = ucfirst($request->title);
 
         $course = Course::findOrFail($id);
         $course->update($data);

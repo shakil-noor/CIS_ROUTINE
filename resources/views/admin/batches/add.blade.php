@@ -45,13 +45,13 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Department</label>
                             <div class="col-sm-10">
-                                <select class="form-control" name="day" id="day">
-                                    <option value="">Select Day</option>
+                                <select class="form-control" name="department_id" id="department">
+                                    <option value="">Select Department</option>
                                     @foreach($departments as $department)
-                                        <option value="{{ $department->id }}">{{ $department->name }}</option>
-                                        @endforeach
+                                        <option @if(old('department_id') == $department->id)selected @endif value="{{ $department->id }}">{{$department->name}}</option>
+                                    @endforeach
                                 </select>
-                                @error('course_type')
+                                @error('department_id')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

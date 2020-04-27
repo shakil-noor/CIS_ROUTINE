@@ -41,7 +41,6 @@
                                     @foreach($departments as $department)
                                         <option @if(old('department_id') == $department->id)selected @endif value="{{ $department->id }}">{{$department->name}}</option>
                                     @endforeach
-                                    <
                                 </select>
                                 @error('department_id')
                                 <div class="text-danger">{{ $message }}</div>

@@ -34,6 +34,7 @@
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>Number of Student</th>
+                                        <th>Department</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -43,6 +44,7 @@
                                             <td>{{ $batches->firstItem() + $key }}</td>
                                             <td>{{ $batch->name }}</td>
                                             <td>{{ $batch->num_of_std }}</td>
+                                            <td>{{ $batch->department->name }}</td>
                                             <td>
                                                 <a type="button" href="{{ route('batch.edit',$batch->id) }}" class="btn btn-warning">Edit</a>
                                                 <form action="{{ route('batch.destroy',$batch->id) }}" method="post">

@@ -31,7 +31,7 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ route('teacherProfile.edit',auth()->user()->id) }}"> Edit Profile</a></li>
-                                        <li><a href="{{ route('teacherProfile.index') }}"> Change Password</a></li>
+                                        <li><a href="{{ route('teacher.passwordEdit') }}"> Change Password</a></li>
                                     </ul>
                                 </div>
                             </div>

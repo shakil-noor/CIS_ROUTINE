@@ -95,4 +95,12 @@ class ProfileController extends Controller
     {
         //
     }
+
+    public function passwordEdit(){
+    return view('teachers.profile.passwordEdit');
+    }
+
+    public function passwordUpdate($id){
+
+    }
 }

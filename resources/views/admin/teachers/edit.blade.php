@@ -38,12 +38,12 @@
                             <label class="col-sm-2 control-label">Designation</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="designation">
-                                    <option value="" >Select Designation</option>
-                                    <option value="Professor">Professor</option>
-                                    <option value="Associate Professor">Associate Professor</option>
-                                    <option value="Assistant Professor">Assistant Professor</option>
-                                    <option value="Sr. Lecturer">Sr. Lecturer</option>
-                                    <option value="Lecturer">Lecturer</option>
+                                    <option>Select Designation</option>
+                                    <option @if(isset($teacher->designation) && $teacher->designation=='Professor') selected @endif @if(old('designation')=='Professor')selected @endif value="Professor">Professor</option>
+                                    <option @if(isset($teacher->designation) && $teacher->designation=='Associate Professor') selected @endif @if(old('designation')=='Associate Professor')selected @endif value="Associate Professor">Associate Professor</option>
+                                    <option @if(isset($teacher->designation) && $teacher->designation=='Assistant Professor') selected @endif @if(old('designation')=='Assistant Professor')selected @endif value="Assistant Professor">Assistant Professor</option>
+                                    <option @if(isset($teacher->designation) && $teacher->designation=='Sr. Lecturer') selected @endif @if(old('designation')=='Sr. Lecturer')selected @endif value="Sr. Lecturer">Sr. Lecturer</option>
+                                    <option @if(isset($teacher->designation) && $teacher->designation=='Lecturer') selected @endif @if(old('designation')=='Lecturer')selected @endif value="Lecturer">Lecturer</option>
                                 </select>
                                 @error('designation')
                                 <div class="text-danger">{{ $message }}</div>

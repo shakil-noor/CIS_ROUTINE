@@ -45,6 +45,8 @@ Route::group(['middleware' =>'auth','prefix'=>'admin', 'namespace'=>'Admin'],fun
 Route::group(['middleware' =>'auth:teacher','prefix'=>'teacher', 'namespace'=>'Teacher'],function (){
     Route::get('dashboard','DashboardController@dashboard')->name('teacher.dashboard');
     Route::resource('teacherProfile','ProfileController');
+    Route::get('changePassword','ProfileController@passwordEdit')->name('teacher.passwordEdit');
+    Route::post('passwordUpdate/{id}','ProfileController@passwordChange')->name('teacher.passwordUpdate');
     Route::get('schedules','ScheduleController@index')->name('teacher.schedule.index');
     Route::get('scheduleView','ScheduleController@view')->name('teacher.schedule.view');
 });

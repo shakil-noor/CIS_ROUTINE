@@ -44,6 +44,21 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Department</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="department_id" id="department">
+                                    <option value="">Select Department</option>
+                                    @foreach($departments as $department)
+                                        <option @if(isset($batch->department_id) && $batch->department_id==$department->id ) selected @endif @if(old('department_id') == $department->id)selected @endif value="{{ $department->id }}">{{$department->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('department_id')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
                         <input type="submit"  class="btn btn-info full-right" value="Update">
                     </form>
                 </div> <!-- panel-body -->
