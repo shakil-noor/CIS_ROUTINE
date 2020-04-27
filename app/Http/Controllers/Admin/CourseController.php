@@ -47,6 +47,9 @@ class CourseController extends Controller
         ]);
 
         $data = $request->except('_token');
+        $data['title'] = ucfirst($request->title);
+        $data['short_name'] = strtoupper($request->short_name);
+
         Course::create($data);
         session()->flash('message','Course created successfully');
         return redirect()->route('course.index');
@@ -93,6 +96,7 @@ class CourseController extends Controller
         ]);
         $data = $request->except('_token');
         $data['title'] = ucfirst($request->title);
+        $data['short_name'] = strtoupper($request->short_name);
 
         $course = Course::findOrFail($id);
         $course->update($data);

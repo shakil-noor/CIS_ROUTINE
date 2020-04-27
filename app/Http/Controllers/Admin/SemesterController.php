@@ -43,6 +43,7 @@ class SemesterController extends Controller
         ]);
         //store data into  data variable from request
         $data = $request->except('_token');
+        $data['name'] = ucfirst($request->name);
 
         //insert or create new data into database
         Semester::create($data);
@@ -86,6 +87,7 @@ class SemesterController extends Controller
             'name' => 'required|unique:semesters,name,'.$id,
         ]);
         $data = $request->except('_token');
+        $data['name'] = ucfirst($request->name);
 
         //update data into database
         $semester = Semester::findOrFail($id);

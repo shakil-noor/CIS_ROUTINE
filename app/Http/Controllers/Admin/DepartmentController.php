@@ -43,6 +43,7 @@ class DepartmentController extends Controller
         ]);
         //store data into  data variable from request
         $data = $request->except('_token');
+        $data['name'] = ucfirst($request->name);
 
         //insert or create new data into database
         Department::create($data);
@@ -86,6 +87,7 @@ class DepartmentController extends Controller
             'name' => 'required|unique:departments,name,'.$id,
         ]);
         $data = $request->except('_token');
+        $data['name'] = ucfirst($request->name);
 
         //update data into database
         $department = Department::findOrFail($id);

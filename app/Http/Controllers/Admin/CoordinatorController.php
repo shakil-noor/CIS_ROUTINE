@@ -49,7 +49,9 @@ class CoordinatorController extends Controller
 
         //store data into  data variable from request
         $data = $request->except('_token');
+        $data['name'] = ucfirst($request->name);
         $data['password'] = bcrypt($request->password);
+
         //insert or create new data into database
         Coordinator::create($data);
         session()->flash('message','Coordinator created successfully');
@@ -96,6 +98,7 @@ class CoordinatorController extends Controller
             'username' => 'required|max:30',
         ]);
         $data = $request->except('_token');
+        $data['name'] = ucfirst($request->name);
 
         //update data into database
         $teacher = Coordinator::findOrFail($id);
