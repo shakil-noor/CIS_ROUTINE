@@ -1,4 +1,4 @@
-@extends('layouts.coordinators.master')
+@extends('layouts.admins.master')
 @section('title','Profile Edit')
 @section('content')
     <!-- Page-Title or brad-cum-->
@@ -7,7 +7,7 @@
             <div class="page-header-title">
                 <h4 class="pull-left page-title">Batch</h4>
                 <ol class="breadcrumb pull-right">
-                    <li><a href="{{ route('coordinator.dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                     <li><a href="">Teacher Edit</a></li>
                 </ol>
                 <div class="clearfix"></div>
@@ -19,9 +19,9 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-primary">
-                <div class="panel-heading"><h3 class="panel-title">Teacher Edit form</h3></div>
+                <div class="panel-heading"><h3 class="panel-title">Profile Edit form</h3></div>
                 <div class="panel-body">
-                    <form class="form-horizontal" action="{{route('coordinatorProfile.update',auth()->user()->id)}}" method="post" role="form" enctype= multipart/form-data>
+                    <form class="form-horizontal" action="{{route('adminProfile.update',auth()->user()->id)}}" method="post" role="form" enctype= multipart/form-data>
                         @csrf
                         @method('put')
                         <div class="form-group">

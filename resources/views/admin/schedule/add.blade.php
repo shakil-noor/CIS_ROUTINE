@@ -163,7 +163,8 @@
                                 for (var i = 0; i < len; i++) {
                                     var room_id = responce.rooms[i].id;
                                     var room_no = responce.rooms[i].room_no;
-                                    var tr_str = "<option value="+room_id+">"+room_no+"</option>";
+                                    var capacity = responce.rooms[i].capacity;
+                                    var tr_str = "<option value="+room_id+">"+room_no+ "("+ capacity +")"+ "</option>";
                                     $("#room").append(tr_str);
                                 }
 

@@ -67,7 +67,7 @@ class ClassScheduleController extends Controller
                 BETWEEN '$start_time' and '$end_time'))")
         );
 
-        $room =DB::select(DB::raw("SELECT rooms.id, rooms.room_no FROM rooms 
+        $room =DB::select(DB::raw("SELECT rooms.id, rooms.room_no, rooms.capacity FROM rooms 
             WHERE rooms.id not in( 
                 SELECT room_id FROM `class_schedules` 
                 WHERE class_schedules.day='$day'

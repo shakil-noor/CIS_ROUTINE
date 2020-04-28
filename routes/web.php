@@ -33,6 +33,9 @@ Route::group(['middleware' =>'auth','prefix'=>'admin', 'namespace'=>'Admin'],fun
     Route::resource('semester','SemesterController');
     Route::resource('batch','BatchController');
     Route::resource('classSchedule','ClassScheduleController');
+    Route::resource('adminProfile','ProfileController');
+    Route::get('changePassword','ProfileController@passwordEdit')->name('admin.passwordEdit');
+    Route::put('passwordUpdate/{id}','ProfileController@passwordUpdate')->name('admin.passwordUpdate');
 
     Route::get('teacherSchedule/{id}','ClassScheduleController@teacherSchedule')->name('teacherSchedule');
     Route::get('batchSchedule/{id}','ClassScheduleController@batchSchedule')->name('batchSchedule');
@@ -55,7 +58,7 @@ Route::group(['middleware' =>'auth:teacher','prefix'=>'teacher', 'namespace'=>'T
 Route::group(['middleware' =>'auth:coordinator','prefix'=>'coordinator', 'namespace'=>'Coordinator'],function (){
     Route::get('dashboard','DashboardController@dashboard')->name('coordinator.dashboard');
     Route::resource('schedule','ScheduleController');
-    Route::get('coordinatorProfile','profileController@index')->name('coordinatorProfile.index');
+    Route::resource('coordinatorProfile','profileController');
     Route::get('changePassword','profileController@passwordEdit')->name('coordinator.passwordEdit');
     Route::put('passwordUpdate/{id}','profileController@passwordUpdate')->name('coordinator.passwordUpdate');
     Route::get('scheduleRequest','ScheduleController@scheduleRequest')->name('coordinator.scheduleRequest');

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Teacher;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\Teacher;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,7 +16,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('teachers.profile.index');
+        return view('admin.profile.index');
     }
 
     /**
@@ -59,7 +59,7 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        return view('teachers.profile.edit');
+        return view('admin.profile.edit');
     }
 
     /**
@@ -71,19 +71,18 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd($request);
         $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:teachers,email,'.$id,
-            'username' => 'required|unique:teachers,username,'.$id,
+            'email' => 'required|unique:users,email,'.$id,
+            'username' => 'required|unique:users,username,'.$id,
         ]);
 
         $data = $request->except('_token');
 
-        $T = Teacher::findOrFail($id);
-        $T->update($data);
-        session()->flash('message','Your Profile updated successfully');
-        return redirect()->route('teacherProfile.index');
+        $admin = User::findOrFail($id);
+        $admin->update($data);
+        session()->flash('message','Profile updated successfully');
+        return redirect()->route('adminProfile.index');
     }
 
     /**
@@ -98,11 +97,10 @@ class ProfileController extends Controller
     }
 
     public function passwordEdit(){
-    return view('teachers.profile.passwordEdit');
+        return view('admin.profile.passwordEdit');
     }
 
     public function passwordUpdate(Request $request, $id){
-    //dd($request->all());
         $request->validate([
             'oldPassword' => 'required',
             'newPassword' => 'required',
@@ -113,13 +111,13 @@ class ProfileController extends Controller
 
         if (Hash::check($request->oldPassword , $oldPassword )) {
             //dd('ok');
-            $teacher = Teacher::findOrFail($id);
+            $admin = User::findOrFail($id);
             $data['password'] = bcrypt($request->newPassword);
-            $teacher->update($data);
+            $admin->update($data);
             session()->flash('message','Password updated successfully');
-            return redirect()->route('teacherProfile.index');
+            return redirect()->route('adminProfile.index');
         }else{
-            session()->flash('errorMessage','old password doesnt matched ');
+            session()->flash('errorMessage','Old password doesnt matched ');
             return redirect()->back();
         }
     }

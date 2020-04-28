@@ -1,24 +1,24 @@
-@extends('layouts.coordinators.master')
+@extends('layouts.admins.master')
 @section('title','Profile')
 @section('content')
     <div class="row">
         <div class="col-sm-12">
             <div class="page-header-title">
-                <h4 class="pull-left page-title">Coordinator Profile</h4>
+                <h4 class="pull-left page-title">Profile</h4>
                 <ol class="breadcrumb pull-right">
-                    <li><a href="{{ route('coordinator.dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                     <li class="active">Profile</li>
                 </ol>
                 <div class="clearfix"></div>
             </div>
         </div>
     </div>
-    @include("layouts.coordinators._message")
+    @include("layouts.admins._message")
     <div class="container">
         <div class="jumbotron">
             <div class="row">
                 <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
-                    <img src="https://www.svgimages.com/svg-image/s5/man-passportsize-silhouette-icon-256x256.png" alt="stack photo" class="img">
+                    <img src="{{ asset('image/user/profilePic.png') }}" alt="stack photo" class="img">
                 </div>
                 <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
                     <div class="container" style="border-bottom:1px solid black">
@@ -31,8 +31,8 @@
                                         <button type="button" class="btn btn-info waves-effect">Modify <i class="ti-arrow-circle-down"></i></button>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="{{ route('coordinatorProfile.edit',auth()->user()->id) }}"> Edit Profile</a></li>
-                                        <li><a href="{{ route('coordinator.passwordEdit') }}"> Change Password</a></li>
+                                        <li><a href="{{ route('adminProfile.edit',auth()->user()->id) }}"> Edit Profile</a></li>
+                                        <li><a href="{{ route('admin.passwordEdit') }}"> Change Password</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -40,7 +40,6 @@
                     </div>
                     <hr>
                     <ul class="container details">
-                        <li><p><b>Department:</b> {{ auth()->user()->department->name }}</p></li>
                         <li><p><b>Email:</b> {{ auth()->user()->email }}</p></li>
                         <li><p><b>Username:</b> {{ auth()->user()->username }}</p></li>
                     </ul>
