@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use App\Model\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -100,7 +101,26 @@ class ProfileController extends Controller
     return view('teachers.profile.passwordEdit');
     }
 
-    public function passwordUpdate($id){
+    public function passwordUpdate(Request $request, $id){
+    //dd($request->all());
+        $request->validate([
+            'oldPassword' => 'required',
+            'newPassword' => 'required',
+            'confirmPassword' => 'required|same:newPassword',
+        ]);
 
+        $oldPassword = auth()->user()->password;
+
+        if (Hash::check($request->oldPassword , $oldPassword )) {
+            //dd('ok');
+            $teacher = Teacher::findOrFail($id);
+            $data['password'] = bcrypt($request->newPassword);
+            $teacher->update($data);
+            session()->flash('message','Password updated successfully');
+            return redirect()->route('teacherProfile.index');
+        }else{
+            session()->flash('errorMessage','old password doesnt matched ');
+            return redirect()->back();
+        }
     }
 }

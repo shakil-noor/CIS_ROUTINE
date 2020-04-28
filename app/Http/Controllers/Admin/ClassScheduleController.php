@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Model\Batch;
 use App\Model\ClassSchedule;
+use App\Model\Department;
 use App\Model\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -45,7 +46,8 @@ class ClassScheduleController extends Controller
      */
     public function create()
     {
-        return view('admin.schedule.add');
+        $data['departments'] = Department::orderBy('id','ASC')->get();
+        return view('admin.schedule.add',$data);
     }
 
     public function scheduleRequest(Request $request){
@@ -118,6 +120,22 @@ class ClassScheduleController extends Controller
     public function store(Request $request)
     {
         dd($request->all());
+        $request->validate([
+            'day' => 'required|unique:batches',
+            'start_time' => 'required|integer',
+            'end_time' => 'required|integer',
+            'course_id' => 'required|integer',
+            'room_id' => 'required|integer',
+            'teacher_id' => 'required|integer',
+            'semester_id' => 'required|integer',
+            'department_id' => 'required|integer',
+        ]);
+
+        $data = $request->except('_token');
+        //dd($data);
+        ClassSchedule::create($data);
+        session()->flash('message','Class Routine created successfully');
+        return redirect()->route('admin.schedule.index');
     }
 
     /**

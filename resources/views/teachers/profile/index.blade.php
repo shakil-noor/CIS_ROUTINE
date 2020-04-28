@@ -13,6 +13,7 @@
             </div>
         </div>
     </div>
+    @include("layouts.coordinators._message")
     <div class="container">
         <div class="jumbotron">
             <div class="row">

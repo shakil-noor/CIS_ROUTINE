@@ -1,27 +1,27 @@
-@extends('layouts.teachers.master')
+@extends('layouts.coordinators.master')
 @section('title','Change password')
 @section('content')
     <!-- Page-Title or brad-cum-->
     <div class="row">
         <div class="col-sm-12">
             <div class="page-header-title">
-                <h4 class="pull-left page-title">Batch</h4>
+                <h4 class="pull-left page-title">Password Change</h4>
                 <ol class="breadcrumb pull-right">
-                    <li><a href="{{ route('teacher.dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ route('coordinator.dashboard') }}">Dashboard</a></li>
                     <li><a href="">Change Password</a></li>
                 </ol>
                 <div class="clearfix"></div>
             </div>
         </div>
     </div>
-    @include("layouts.teachers._message")
+    @include("layouts.coordinators._message")
     {{--form start--}}
     <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-primary">
                 <div class="panel-heading"><h3 class="panel-title">Password Change form</h3></div>
                 <div class="panel-body">
-                    <form class="form-horizontal" action="{{route('teacher.passwordUpdate',auth()->user()->id)}}" method="post" role="form" enctype= multipart/form-data>
+                    <form class="form-horizontal" action="{{route('coordinator.passwordUpdate',auth()->user()->id)}}" method="post" role="form" enctype= multipart/form-data>
                         @csrf
                         @method('put')
                         <div class="form-group">

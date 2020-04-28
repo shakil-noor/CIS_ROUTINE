@@ -46,7 +46,7 @@ Route::group(['middleware' =>'auth:teacher','prefix'=>'teacher', 'namespace'=>'T
     Route::get('dashboard','DashboardController@dashboard')->name('teacher.dashboard');
     Route::resource('teacherProfile','ProfileController');
     Route::get('changePassword','ProfileController@passwordEdit')->name('teacher.passwordEdit');
-    Route::post('passwordUpdate/{id}','ProfileController@passwordChange')->name('teacher.passwordUpdate');
+    Route::put('passwordUpdate/{id}','ProfileController@passwordUpdate')->name('teacher.passwordUpdate');
     Route::get('schedules','ScheduleController@index')->name('teacher.schedule.index');
     Route::get('scheduleView','ScheduleController@view')->name('teacher.schedule.view');
 });
@@ -55,6 +55,9 @@ Route::group(['middleware' =>'auth:teacher','prefix'=>'teacher', 'namespace'=>'T
 Route::group(['middleware' =>'auth:coordinator','prefix'=>'coordinator', 'namespace'=>'Coordinator'],function (){
     Route::get('dashboard','DashboardController@dashboard')->name('coordinator.dashboard');
     Route::resource('schedule','ScheduleController');
+    Route::get('coordinatorProfile','profileController@index')->name('coordinatorProfile.index');
+    Route::get('changePassword','profileController@passwordEdit')->name('coordinator.passwordEdit');
+    Route::put('passwordUpdate/{id}','profileController@passwordUpdate')->name('coordinator.passwordUpdate');
     Route::get('scheduleRequest','ScheduleController@scheduleRequest')->name('coordinator.scheduleRequest');
 });
 
