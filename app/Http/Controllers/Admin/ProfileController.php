@@ -110,7 +110,6 @@ class ProfileController extends Controller
         $oldPassword = auth()->user()->password;
 
         if (Hash::check($request->oldPassword , $oldPassword )) {
-            //dd('ok');
             $admin = User::findOrFail($id);
             $data['password'] = bcrypt($request->newPassword);
             $admin->update($data);

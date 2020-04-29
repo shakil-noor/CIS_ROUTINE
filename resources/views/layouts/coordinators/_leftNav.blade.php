@@ -3,7 +3,7 @@
         <div class="user-details">
             <div class="user-info">
                 <div class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Kenny Rigdon</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{ auth()->user()->name }}</a>
                 </div>
 
                 <p class="text-muted m-0"><i class="fa fa-dot-circle-o text-success"></i> Online</p>
