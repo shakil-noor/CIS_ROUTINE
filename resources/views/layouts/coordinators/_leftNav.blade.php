@@ -6,7 +6,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{ auth()->user()->name }}</a>
                 </div>
 
-                <p class="text-muted m-0"><i class="fa fa-dot-circle-o text-success"></i> Online</p>
+                <p class="text-muted m-0"><i class="fa fa-dot-circle-o text-success"></i> Coordinator</p>
             </div>
         </div>
         <!--- Divider -->
@@ -23,8 +23,9 @@
                 <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect"><i class="ti-files"></i><span> Class Schedule </span><span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
                     <ul class="list-unstyled">
-                        <li><a href="{{ route('classSchedule.index') }}">List</a></li>
-                        <li><a href="{{ route('classSchedule.create') }}">Create New</a></li>
+                        <li><a href="{{ route('schedule.index') }}">List</a></li>
+                        <li><a href="{{ route('coordinator.classSchedule.view') }}">View</a></li>
+                        <li><a href="{{ route('schedule.create') }}">Create New</a></li>
                     </ul>
                 </li>
 

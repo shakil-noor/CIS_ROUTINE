@@ -18,7 +18,7 @@
         <div class="jumbotron">
             <div class="row">
                 <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
-                    <img src="https://www.svgimages.com/svg-image/s5/man-passportsize-silhouette-icon-256x256.png" alt="stack photo" class="img">
+                    <img src="{{ asset('image/user/profilePic.png') }}" alt="stack photo" class="img">
                 </div>
                 <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
                     <div class="container" style="border-bottom:1px solid black">

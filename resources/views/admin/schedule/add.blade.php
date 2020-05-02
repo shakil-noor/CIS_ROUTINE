@@ -78,10 +78,10 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Course</label>
                             <div class="col-sm-10">
-                                <select class="form-control" name="course" id="course">
+                                <select class="form-control" name="course_id" id="course">
                                     <option value="">Select Course</option>
                                 </select>
-                                @error('course')
+                                @error('course_id')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -90,10 +90,10 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Room</label>
                             <div class="col-sm-10">
-                                <select class="form-control" name="room" id="room">
+                                <select class="form-control" name="room_id" id="room">
                                     <option value="">Select Room</option>
                                 </select>
-                                @error('room')
+                                @error('room_id')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -102,10 +102,25 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Teacher</label>
                             <div class="col-sm-10">
-                                <select class="form-control" name="teacher" id="teacher">
+                                <select class="form-control" name="teacher_id" id="teacher">
                                     <option value="">Select Teacher</option>
                                 </select>
-                                @error('teacher')
+                                @error('teacher_id')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Semester</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="semester_id" id="semester">
+                                    <option value="">Select Department</option>
+                                    @foreach($semesters as $semester)
+                                        <option @if(old('semester_id') == $semester->id)selected @endif value="{{ $semester->id }}">{{$semester->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('semester_id')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -114,7 +129,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Batches</label>
                             <div class="col-sm-10">
-                                <select class="form-control" name="batches" id="batches" multiple="multiple">
+                                <select class="form-control" multiple="multiple"  name="batches[]" id="batches" >
                                     <option value="">Select Batches</option>
                                 </select>
                                 @error('batches')
@@ -122,6 +137,8 @@
                                 @enderror
                             </div>
                         </div>
+
+
                         <input type="submit"  class="btn btn-info full-right" value="Submit">
                     </form>
                 </div> <!-- panel-body -->
@@ -179,6 +196,8 @@
 
                                 $('#batches').html();
                                 var len = responce.batches.length;
+                                document.getElementById("batches").innerHTML = "";
+                                $("#batches").append("<option value=''>Select Batches</option>");
                                 for (var i = 0; i < len; i++) {
                                     var batch_id = responce.batches[i].id;
                                     var batch_name = responce.batches[i].name;

@@ -22,10 +22,11 @@ class ClassSchedule extends Model
     public function department(){
         return $this->belongsTo(Department::class);
     }
-    public function Semester(){
+    public function semester(){
         return $this->belongsTo(Semester::class);
     }
-    public function batch(){
-        return $this->belongsTo(Batch::class);
+
+    public function batchSchedule(){
+        return $this->hasMany(BatchSchedule::class);
     }
 }

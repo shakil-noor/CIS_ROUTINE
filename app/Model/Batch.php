@@ -10,8 +10,8 @@ class Batch extends Model
         'name','num_of_std','department_id',
     ];
 
-    public function classSchedule(){
-        return $this->hasMany(ClassSchedule::class);
+    public function batchSchedule(){
+        return $this->hasMany(BatchSchedule::class);
     }
     public function department(){
         return $this->belongsTo(Department::class);

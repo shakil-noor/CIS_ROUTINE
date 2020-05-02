@@ -30,9 +30,9 @@
         </div>
     </div> <!-- End Row -->
     <div class="row">
-        @if(count($schedules)==0)
-            <h2>There is no class today</h2>
-            @else
+        {{--{{count($schedules)}}--}}
+        @if(count($schedules)>0)
+
             @foreach($schedules as $schedule)
                 <div class="col-sm-6 col-lg-3">
                     <div class="panel panel-primary text-center">
@@ -48,6 +48,8 @@
                     </div>
                 </div>
             @endforeach
+        @else
+            <h2>There is no class today</h2>
         @endif
     </div>
 @endsection

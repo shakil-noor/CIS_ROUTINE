@@ -6,7 +6,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{ auth()->user()->name }}</a>
                 </div>
 
-                <p class="text-muted m-0"><i class="fa fa-dot-circle-o text-success"></i> Online</p>
+                <p class="text-muted m-0"><i class="fa fa-dot-circle-o text-success"></i> Admin</p>
             </div>
         </div>
         <!--- Divider -->
@@ -83,6 +83,7 @@
                     <a href="javascript:void(0);" class="waves-effect"><i class="ti-calendar"></i><span> Class Schedule </span><span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
                     <ul class="list-unstyled">
                         <li><a href="{{ route('classSchedule.index') }}">List</a></li>
+                        <li><a href="{{ route('admin.classSchedule.view') }}">View</a></li>
                         <li><a href="{{ route('classSchedule.create') }}">Create New</a></li>
 
                     </ul>

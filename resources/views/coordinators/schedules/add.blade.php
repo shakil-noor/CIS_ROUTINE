@@ -21,7 +21,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading"><h3 class="panel-title">Class Schedule create form</h3></div>
                 <div class="panel-body">
-                    <form class="form-horizontal" action="{{route('classSchedule.store')}}" method="post" role="form" enctype= multipart/form-data>
+                    <form class="form-horizontal" action="{{route('schedule.store')}}" method="post" role="form" enctype= multipart/form-data>
                         @csrf
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Day</label>
@@ -163,6 +163,7 @@
 
                                 $('#batches').html();
                                 var len = responce.batches.length;
+                                document.getElementById("batches").innerHTML = "";
                                 for (var i = 0; i < len; i++) {
                                     var batch_id = responce.batches[i].id;
                                     var batch_name = responce.batches[i].name;

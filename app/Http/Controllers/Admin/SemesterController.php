@@ -40,6 +40,7 @@ class SemesterController extends Controller
         //dd($request->all());
         $request->validate([
             'name' => 'required|unique:semesters',
+            'status' => 'required',
         ]);
         //store data into  data variable from request
         $data = $request->except('_token');
@@ -85,6 +86,7 @@ class SemesterController extends Controller
     {
         $request->validate([
             'name' => 'required|unique:semesters,name,'.$id,
+            'status' => 'required',
         ]);
         $data = $request->except('_token');
         $data['name'] = ucfirst($request->name);

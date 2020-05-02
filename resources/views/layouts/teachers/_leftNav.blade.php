@@ -6,7 +6,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{ auth()->user()->name }}</a>
                 </div>
 
-                <p class="text-muted m-0"><i class="fa fa-dot-circle-o text-success"></i> Online</p>
+                <p class="text-muted m-0"><i class="fa fa-dot-circle-o text-success"></i> Teacher</p>
             </div>
         </div>
         <!--- Divider -->

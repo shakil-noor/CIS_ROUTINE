@@ -33,6 +33,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Status</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="status" id="status">
+                                    <option value="">Select Status</option>
+                                    <option @if(old('status')=='Active')selected @endif  value="Active">Active</option>
+                                    <option @if(old('status')=='Inactive')selected @endif value="Inactive">Inactive</option>
+                                </select>
+                                @error('status')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
                         <input type="submit"  class="btn btn-info full-right" value="Submit">
                     </form>
                 </div> <!-- panel-body -->

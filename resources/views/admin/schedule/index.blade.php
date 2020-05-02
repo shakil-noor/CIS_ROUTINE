@@ -35,7 +35,7 @@
                                         <th>Course</th>
                                         <th>Room</th>
                                         <th>Teacher</th>
-                                        <th>Semester</th>
+                                        <th>Batches</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -49,7 +49,7 @@
                                             <td>{{ $CS->course->title }}</td>
                                             <td>{{ $CS->room->room_no }}</td>
                                             <td>{{ $CS->teacher->name }}</td>
-                                            <td>{{ $CS->semester->name }}</td>
+                                            <td></td>
                                             <td>
                                                 <a type="button" href="{{ route('classSchedule.edit',$CS->id) }}" class="habijabi btn btn-warning" id="habijabi" >Edit</a>
                                                 <form action="{{ route('classSchedule.destroy',$CS->id) }}" method="post">

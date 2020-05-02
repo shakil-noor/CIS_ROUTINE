@@ -32,14 +32,17 @@ Route::group(['middleware' =>'auth','prefix'=>'admin', 'namespace'=>'Admin'],fun
     Route::resource('department','DepartmentController');
     Route::resource('semester','SemesterController');
     Route::resource('batch','BatchController');
+
     Route::resource('classSchedule','ClassScheduleController');
+    Route::get('scheduleRequest','ClassScheduleController@scheduleRequest')->name('admin.scheduleRequest');
+    Route::get('scheduleView','ClassScheduleController@scheduleView')->name('admin.classSchedule.view');
+    Route::get('teacherSchedule/{id}','ClassScheduleController@teacherSchedule')->name('admin.teacherSchedule');
+    Route::get('batchSchedule/{id}','ClassScheduleController@batchSchedule')->name('admin.batchSchedule');
+
     Route::resource('adminProfile','ProfileController');
     Route::get('changePassword','ProfileController@passwordEdit')->name('admin.passwordEdit');
     Route::put('passwordUpdate/{id}','ProfileController@passwordUpdate')->name('admin.passwordUpdate');
 
-    Route::get('teacherSchedule/{id}','ClassScheduleController@teacherSchedule')->name('teacherSchedule');
-    Route::get('batchSchedule/{id}','ClassScheduleController@batchSchedule')->name('batchSchedule');
-    Route::get('scheduleRequest','ClassScheduleController@scheduleRequest')->name('admin.scheduleRequest');
 
     Route::get('teacherSchedulePDF/{id}','PDFController@teacherSchedulePDF')->name('teacherSchedulePDF');;
 });
@@ -58,9 +61,16 @@ Route::group(['middleware' =>'auth:teacher','prefix'=>'teacher', 'namespace'=>'T
 Route::group(['middleware' =>'auth:coordinator','prefix'=>'coordinator', 'namespace'=>'Coordinator'],function (){
     Route::get('dashboard','DashboardController@dashboard')->name('coordinator.dashboard');
     Route::resource('schedule','ScheduleController');
+    Route::get('scheduleRequest','ScheduleController@scheduleRequest')->name('coordinator.scheduleRequest');
+    Route::get('scheduleView','ScheduleController@scheduleView')->name('coordinator.classSchedule.view');
+    Route::get('teacherSchedule/{id}','ScheduleController@teacherSchedule')->name('coordinator.teacherSchedule');
+    Route::get('batchSchedule/{id}','ScheduleController@batchSchedule')->name('coordinator.batchSchedule');
+
     Route::resource('coordinatorProfile','profileController');
     Route::get('changePassword','profileController@passwordEdit')->name('coordinator.passwordEdit');
     Route::put('passwordUpdate/{id}','profileController@passwordUpdate')->name('coordinator.passwordUpdate');
-    Route::get('scheduleRequest','ScheduleController@scheduleRequest')->name('coordinator.scheduleRequest');
+    Route::get('teacherSchedulePDF/{id}','PDFController@teacherSchedulePDF')->name('coordinator.teacherSchedulePDF');;
 });
+
+
 

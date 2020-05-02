@@ -4,12 +4,16 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Semester extends Model
+class BatchSchedule extends Model
 {
     protected $fillable = [
-        'name','status',
+        'batch_id','class_schedule_id',
     ];
+
     public function classSchedule(){
         return $this->hasMany(ClassSchedule::class);
+    }
+    public function batch(){
+        return $this->belongsTo(Batch::class);
     }
 }

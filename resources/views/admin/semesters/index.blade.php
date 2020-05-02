@@ -30,6 +30,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Semester name</th>
+                                        <th>Status</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -37,6 +38,7 @@
                                         <tr>
                                             <td>{{ $semesters->firstItem() + $key }}</td>
                                             <td>{{ $semester->name }}</td>
+                                            <td>{{ $semester->status }}</td>
                                             <td>
                                                 <a type="button" href="{{ route('semester.edit',$semester->id) }}" class="btn btn-warning">Edit</a>
                                                 <form action="{{ route('semester.destroy',$semester->id) }}" method="post">
