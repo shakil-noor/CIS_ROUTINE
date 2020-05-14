@@ -150,7 +150,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <input type="submit"  class="btn btn-info full-right" value="Submit">
+                        <input type="submit"  class="btn btn-info full-right" value="Update">
                     </form>
                 </div> <!-- panel-body -->
             </div> <!-- panel -->

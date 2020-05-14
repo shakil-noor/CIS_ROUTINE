@@ -215,6 +215,10 @@ class ClassScheduleController extends Controller
             'semester_id' => 'required|integer',
             'batches' => 'required|array',
         ]);
+        $creator = auth()->user()->username;
+        $request->request->add([
+            'created_by' => $creator,
+        ]);
 
         DB::beginTransaction();
         try {
@@ -332,6 +336,7 @@ class ClassScheduleController extends Controller
             'semester_id' => 'required|integer',
             'batches' => 'required|array',
         ]);
+        $creator = auth()->user()->username;
 
         DB::beginTransaction();
         try {
@@ -345,6 +350,7 @@ class ClassScheduleController extends Controller
             $classSchedule->room_id = $request->room_id;
             $classSchedule->teacher_id = $request->teacher_id;
             $classSchedule->semester_id = $request->semester_id;
+            $classSchedule->updated_by = $creator;
 
             $classSchedule->save();
             foreach ($classSchedule->batchSchedule as $batchSchedule) {

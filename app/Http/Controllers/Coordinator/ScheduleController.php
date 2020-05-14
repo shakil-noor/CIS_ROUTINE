@@ -219,10 +219,12 @@ class ScheduleController extends Controller
         $semesters = Semester::where("status",'=',"Active")->first();
         $semester_id = $semesters->id;
         $deptId = auth()->user()->department_id ;
+        $creator = auth()->user()->username;
 
         $request->request->add([
             'department_id' => $deptId,
             'semester_id' => $semester_id,
+            'created_by' => $creator,
         ]);
 
         //dd($request->all());
@@ -343,7 +345,8 @@ class ScheduleController extends Controller
 
         $semesters = Semester::where("status",'=',"Active")->first();
         $semester_id = $semesters->id;
-        $deptId = auth()->user()->department_id ;
+        $deptId = auth()->user()->department_id;
+        $creator = auth()->user()->username;
 
         DB::beginTransaction();
         try {
@@ -357,6 +360,7 @@ class ScheduleController extends Controller
             $classSchedule->room_id = $request->room_id;
             $classSchedule->teacher_id = $request->teacher_id;
             $classSchedule->semester_id = $semester_id;
+            $classSchedule->updated_by = $creator;
 
             $classSchedule->save();
             foreach ($classSchedule->batchSchedule as $batchSchedule) {

@@ -1,18 +1,18 @@
 @extends('layouts.coordinators.master')
 @section('title','New Schedule create')
 @section('content')
-    class="row">
-    <div class="col-sm-12">
-        <div class="page-header-title">
-            <h4 class="pull-left page-title">Class Schedule</h4>
-            <ol class="breadcrumb pull-right">
-                <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                <li><a href="">Class Schedule</a></li>
-            </ol>
-            <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-header-title">
+                <h4 class="pull-left page-title">Class Schedule</h4>
+                <ol class="breadcrumb pull-right">
+                    <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                    <li><a href="">Class Schedule</a></li>
+                </ol>
+                <div class="clearfix"></div>
+            </div>
         </div>
     </div>
-
     @include("layouts.admins._message")
     <div class="row">
         <div class="col-md-12">
