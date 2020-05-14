@@ -20,8 +20,7 @@ class ClassScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(){
         $data['classSchedules'] = ClassSchedule::orderBy('id','DESC')->paginate(5);
         return view('admin.schedule.index',$data);
     }
@@ -138,7 +137,6 @@ class ClassScheduleController extends Controller
     }
 
     public function scheduleRequest(Request $request){
-
         $day = $request->day;
         $start_time = $request->start_time;
         $end_time = $request->end_time;
@@ -174,7 +172,7 @@ class ClassScheduleController extends Controller
                 BETWEEN '$start_time' and '$end_time'))")
         );
 
-        $batch = DB::select(DB::raw("SELECT batches.id, batches.name FROM batches
+        $batch = DB::select(DB::raw("SELECT batches.id, batches.name, batches.num_of_std FROM batches
                                         WHERE batches.id not in( 
                                             SELECT batch_id FROM `batch_schedules` 
                                                 WHERE batch_schedules.class_schedule_id IN (
@@ -225,7 +223,7 @@ class ClassScheduleController extends Controller
             foreach ($request->batches as $batch) {
                 BatchSchedule::create([
                     'batch_id' => $batch,
-                    'schedule_id' => $schedule->id,
+                    'class_schedule_id' => $schedule->id,
                 ]);
             }
             DB::commit();
@@ -235,7 +233,7 @@ class ClassScheduleController extends Controller
         }
 
         session()->flash('message','Class Routine created successfully');
-        return redirect()->route('admin.schedule.list');
+        return redirect()->route('classSchedule.index');
     }
 
     /**
@@ -257,7 +255,61 @@ class ClassScheduleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['departments'] = Department::orderBy('id','ASC')->get();
+        $data['semesters'] = Semester::orderBy('id','ASC')->get();
+        $data['classSchedule'] = ClassSchedule::findOrFail($id);
+
+        $day = $data['classSchedule']->day;
+        $start_time = $data['classSchedule']->start_time;
+        $end_time = $data['classSchedule']->end_time;
+
+        $data['courses'] =DB::select(DB::raw("SELECT courses.id, courses.title FROM courses
+            WHERE courses.id not in(
+                SELECT course_id FROM `class_schedules`
+                WHERE class_schedules.day='$day'
+                AND (class_schedules.start_time
+                BETWEEN '$start_time' and '$end_time'
+                OR class_schedules.end_time
+                BETWEEN '$start_time' and '$end_time'))")
+        );
+
+        $data['rooms'] =DB::select(DB::raw("SELECT rooms.id, rooms.room_no, rooms.capacity FROM rooms
+            WHERE rooms.id not in(
+                SELECT room_id FROM `class_schedules`
+                WHERE class_schedules.day='$day'
+                AND (class_schedules.start_time
+                BETWEEN '$start_time' and '$end_time'
+                OR class_schedules.end_time
+                BETWEEN '$start_time' and '$end_time'))")
+        );
+
+        $data['teachers'] =DB::select(DB::raw("SELECT teachers.id, teachers.name FROM teachers
+            WHERE teachers.id not in(
+                SELECT teacher_id FROM `class_schedules`
+                WHERE class_schedules.day='$day'
+                AND (class_schedules.start_time
+                BETWEEN '$start_time' and '$end_time'
+                OR class_schedules.end_time
+                BETWEEN '$start_time' and '$end_time'))")
+        );
+
+        $data['batches'] = DB::select(DB::raw("SELECT batches.id, batches.name, batches.num_of_std FROM batches
+                                        WHERE batches.id not in(
+                                            SELECT batch_id FROM `batch_schedules`
+                                                WHERE batch_schedules.class_schedule_id IN (
+                                                    SELECT class_schedules.id FROM class_schedules
+                                                    WHERE class_schedules.day='$day'
+                                                    AND(
+                                                        class_schedules.start_time
+                                                        BETWEEN '$start_time' and '$end_time'
+                                                        OR class_schedules.end_time
+                                                        BETWEEN '$start_time' and '$end_time'
+                                                     )
+                                                )
+                                         )")
+        );
+
+        return view('admin.schedule.edit',$data);
     }
 
     /**
@@ -269,7 +321,51 @@ class ClassScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'day' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'department_id' => 'required|integer',
+            'course_id' => 'required|integer',
+            'room_id' => 'required|integer',
+            'teacher_id' => 'required|integer',
+            'semester_id' => 'required|integer',
+            'batches.*' => 'required|integer',
+        ]);
+
+        DB::beginTransaction();
+        try {
+            //$data = $request->except('batches');
+            $classSchedule = ClassSchedule::findorFail($id);
+            $classSchedule->day = $request->day;
+            $classSchedule->start_time = $request->start_time;
+            $classSchedule->end_time = $request->end_time;
+            $classSchedule->department_id = $request->department_id;
+            $classSchedule->course_id = $request->course_id;
+            $classSchedule->room_id = $request->room_id;
+            $classSchedule->teacher_id = $request->teacher_id;
+            $classSchedule->semester_id = $request->semester_id;
+
+            $classSchedule->save();
+            foreach ($classSchedule->batchSchedule as $batchSchedule) {
+                $batchSchedule->delete();
+            }
+            foreach ($request->batches as $batch) {
+                BatchSchedule::create([
+                    'batch_id' => $batch,
+                    'class_schedule_id' => $classSchedule->id,
+                ]);
+            }
+            DB::commit();
+        }catch (\Exception $exception){
+            DB::rollBack();
+            Log::error($exception->getMessage());
+            session()->flash('message','Something went wrong please try again some thing later');
+            return redirect()->back();
+        }
+
+        session()->flash('message','Class Routine Updated successfully');
+        return redirect()->route('classSchedule.index');
     }
 
     /**
@@ -280,6 +376,12 @@ class ClassScheduleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $class = ClassSchedule::findOrFail($id);
+        foreach ($class->batchSchedule as $batchSchedule) {
+            $batchSchedule->delete();
+        }
+        $class->delete();
+        session()->flash('message','Class Routine Deleted successfully');
+        return redirect()->route('classSchedule.index');
     }
 }

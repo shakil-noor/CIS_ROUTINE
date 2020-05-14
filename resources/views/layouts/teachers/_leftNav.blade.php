@@ -20,20 +20,12 @@
                     <a href="{{ route('teacherProfile.index') }}" class="waves-effect"><i class="ti-home"></i><span> Profile </span></a>
                 </li>
 
-                <li>
+                {{-- <li>
                     <a href="{{ route('teacher.schedule.index') }}" class="waves-effect"><i class="ti-home"></i><span> Schedule </span></a>
+                </li> --}}
+                <li>
+                    <a href="{{ route('teacher.schedule.view') }}" target="_blank" class="waves-effect"><i class="ti-calendar"></i><span> View Class Routine </span></a>
                 </li>
-
-                <li class="has_sub">
-                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-files"></i><span> Class Schedule </span><span class="pull-right"><i class="mdi mdi-plus"></i></span></a>
-                    <ul class="list-unstyled">
-                        <li><a href="{{ route('classSchedule.index') }}">List</a></li>
-                        <li><a href="{{ route('classSchedule.create') }}">Create New</a></li>
-
-                    </ul>
-                </li>
-
-
             </ul>
         </div>
         <div class="clearfix"></div>

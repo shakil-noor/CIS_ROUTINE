@@ -35,7 +35,7 @@
                                     <option value="Wednesday">Wednesday</option>
                                     <option value="Thursday">Thursday</option>
                                 </select>
-                                @error('course_type')
+                                @error('day')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -115,7 +115,7 @@
                             <label class="col-sm-2 control-label">Semester</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="semester_id" id="semester">
-                                    <option value="">Select Department</option>
+                                    <option value="">Select Semester</option>
                                     @foreach($semesters as $semester)
                                         <option @if(old('semester_id') == $semester->id)selected @endif value="{{ $semester->id }}">{{$semester->name}}</option>
                                     @endforeach
@@ -162,7 +162,7 @@
 
                         $.ajax({
                             type:'GET',
-                            url: '{{route('admin.scheduleRequest')}}',
+                            url: '{{route('ScheduleRequest')}}',
                             data: {day:day, start_time:start_time,end_time:end_time},
                             dataType: 'json',
                             success:function(responce){
@@ -201,7 +201,8 @@
                                 for (var i = 0; i < len; i++) {
                                     var batch_id = responce.batches[i].id;
                                     var batch_name = responce.batches[i].name;
-                                    var tr_str = "<option value="+batch_id+">"+batch_name+"</option>";
+                                    var number_of_std = responce.batches[i].num_of_std;
+                                    var tr_str = "<option value="+batch_id+">"+batch_name+ "("+ number_of_std +")"+"</option>";
                                     $("#batches").append(tr_str);
                                 }
                             }

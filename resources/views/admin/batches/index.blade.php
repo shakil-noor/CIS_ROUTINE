@@ -21,9 +21,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Batches List</h3>
                 </div>
-                <div class="panel-heading right">
-                    <a class="btn btn-default">add New</a>
-                </div>
+                
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-12">

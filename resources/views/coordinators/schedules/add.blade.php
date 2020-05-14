@@ -1,5 +1,5 @@
-@extends('layouts.admins.master')
-@section('title','New Teacher create')
+@extends('layouts.coordinators.master')
+@section('title','New class Schedule create')
 @section('content')
     <!-- Page-Title or brad-cum-->
     <div class="row">

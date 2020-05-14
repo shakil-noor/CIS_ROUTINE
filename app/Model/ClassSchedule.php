@@ -25,8 +25,7 @@ class ClassSchedule extends Model
     public function semester(){
         return $this->belongsTo(Semester::class);
     }
-
     public function batchSchedule(){
-        return $this->hasMany(BatchSchedule::class);
+        return $this->hasMany(BatchSchedule::class,'class_schedule_id');
     }
 }

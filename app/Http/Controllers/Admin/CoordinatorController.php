@@ -42,8 +42,8 @@ class CoordinatorController extends Controller
         $request->validate([
             'name' => 'required',
             'department_id' => 'required',
-            'email' => 'required|email',
-            'username' => 'required',
+            'email' => 'required|email|unique:coordinators',
+            'username' => 'required|unique:coordinators',
             'password' => 'required|min:6',
         ]);
 
@@ -94,8 +94,8 @@ class CoordinatorController extends Controller
         $request->validate([
             'name' => 'required',
             'department_id' => 'required',
-            'email' => 'required|email',
-            'username' => 'required|max:30',
+            'email' => 'required|email|unique:coordinators,email,'.$id,
+            'username' => 'required|max:30|unique:coordinators,name'.$id,
         ]);
         $data = $request->except('_token');
         $data['name'] = ucfirst($request->name);

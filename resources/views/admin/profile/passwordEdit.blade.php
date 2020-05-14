@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="page-header-title">
-                <h4 class="pull-left page-title">Batch</h4>
+                <h4 class="pull-left page-title">Admin Password Change</h4>
                 <ol class="breadcrumb pull-right">
                     <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                     <li><a href="">Change Password</a></li>

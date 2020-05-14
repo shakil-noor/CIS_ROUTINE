@@ -34,7 +34,7 @@ Route::group(['middleware' =>'auth','prefix'=>'admin', 'namespace'=>'Admin'],fun
     Route::resource('batch','BatchController');
 
     Route::resource('classSchedule','ClassScheduleController');
-    Route::get('scheduleRequest','ClassScheduleController@scheduleRequest')->name('admin.scheduleRequest');
+    Route::get('scheduleRequest','ClassScheduleController@scheduleRequest')->name('ScheduleRequest');
     Route::get('scheduleView','ClassScheduleController@scheduleView')->name('admin.classSchedule.view');
     Route::get('teacherSchedule/{id}','ClassScheduleController@teacherSchedule')->name('admin.teacherSchedule');
     Route::get('batchSchedule/{id}','ClassScheduleController@batchSchedule')->name('admin.batchSchedule');

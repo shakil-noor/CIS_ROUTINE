@@ -7,7 +7,7 @@
 @endsection
 
 @section('title','Teacher Dashboard')
-
+{{ date_default_timezone_set("Asia/Dhaka")}}
 @section('content')
     <div class="row">
         <div class="col-sm-12">
@@ -24,7 +24,7 @@
         <div class="col-md-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Today's Schedule - {{ date('l', strtotime(date('Y-m-d'))) }}</h3>
+                    <h3 class="panel-title">Today's Schedule - {{ date('l', strtotime(date('Y-m-d'))) }} - {{date('d-m-Y')}}</h3> 
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
                             <h4 class="">{{ $schedule->start_time }} - {{ $schedule->end_time }}</h4>
                             <p class="text-muted"><b>Room No: </b> {{ $schedule->room->room_no }}</p>
                             <p class="text-muted"><b>Department: </b> {{ $schedule->department->name }}</p>
-                            <p class="text-muted"><b>15%</b> Orders in Last 10 months</p>
+                            {{--<p class="text-muted"><b>15%</b> Orders in Last 10 months</p>--}}
                         </div>
                     </div>
                 </div>

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
     public function dashboard(){
+
+        date_default_timezone_set("Asia/Dhaka");
         $teacherId = auth()->user()->id;
         $weekday = date('l', strtotime(date('Y-m-d')));
 

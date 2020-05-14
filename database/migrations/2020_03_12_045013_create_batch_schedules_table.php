@@ -17,8 +17,8 @@ class CreateBatchSchedulesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('batch_id');
             $table->foreign('batch_id')->references('id')->on('batches')->onDelete('cascade');
-            $table->unsignedBigInteger('schedule_id');
-            $table->foreign('schedule_id')->references('id')->on('class_schedules')->onDelete('cascade');
+            $table->unsignedBigInteger('class_schedule_id');
+            $table->foreign('class_schedule_id')->references('id')->on('class_schedules')->onDelete('cascade');
             $table->timestamps();
         });
     }

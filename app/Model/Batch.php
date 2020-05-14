@@ -11,7 +11,7 @@ class Batch extends Model
     ];
 
     public function batchSchedule(){
-        return $this->hasMany(BatchSchedule::class);
+        return $this->hasMany(BatchSchedule::class,'batch_id');
     }
     public function department(){
         return $this->belongsTo(Department::class);

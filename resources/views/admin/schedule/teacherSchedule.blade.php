@@ -14,10 +14,11 @@
 <header class="cd-main-header text-center flex flex-column flex-center">
     <h1 class="text-xl">Class Schedule of {{ $teacher->name }}</h1>
     {{--<button onclick="window.print()">Print</button>--}}
-    <input type="button" onclick="printDiv('printableArea')" value="print a div!" />
+    {{--<input type="button" onclick="printDiv('printableArea')" value="print a div!" />--}}
+    <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
 </header>
 
-<div class="cd-schedule cd-schedule--loading margin-top-lg margin-bottom-lg js-cd-schedule">
+<div class="own-c cd-schedule cd-schedule--loading margin-top-lg margin-bottom-lg js-cd-schedule">
     <div class="cd-schedule__timeline">
         <ul>
             <li><span>09:00</span></li>
@@ -69,6 +70,9 @@
                             <a data-start="{{ $sun->start_time }}" data-end="{{ $sun->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                 <em class="cd-schedule__name">{{ $sun->course->title }}</em>
                                 {{ $sun->room->room_no }}
+                                @foreach($sun->batchSchedule as $bs )
+                                    {{ $bs->batch->name }},
+                                @endforeach
                             </a>
                         </li>
                     @endforeach
@@ -163,16 +167,24 @@
 </div> <!-- .cd-schedule -->
 </div>
 <script>
-    function printDiv(divName) {
-        var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
-
-        document.body.innerHTML = printContents;
-
-        window.print();
-
-        document.body.innerHTML = originalContents;
-    }
+    // function printDiv(divName) {
+    //     var printContents = document.getElementById(divName).innerHTML;
+    //     var originalContents = document.body.innerHTML;
+    //
+    //     document.body.innerHTML = printContents;
+    //
+    //     window.print();
+    //
+    //     document.body.innerHTML = originalContents;
+    // }
+    $('#printInvoice').click(function(){
+        Popup($(document.getElementsByTagName("html")[0].className += " js"));
+        function Popup(data)
+        {
+            window.print();
+            return true;
+        }
+    });
 </script>
 {{--<script src="assets/js/util.js"></script> <!-- util functions included in the CodyHouse framework -->--}}
 {{--<script src="assets/js/main.js"></script>--}}

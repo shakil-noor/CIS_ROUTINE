@@ -49,7 +49,11 @@
                                             <td>{{ $CS->course->title }}</td>
                                             <td>{{ $CS->room->room_no }}</td>
                                             <td>{{ $CS->teacher->name }}</td>
-                                            <td></td>
+                                            <td>
+                                                @foreach($CS->batchSchedule as $bs )
+                                                    {{ $bs->batch->name }},
+                                                     @endforeach
+                                            </td>
                                             <td>
                                                 <a type="button" href="{{ route('classSchedule.edit',$CS->id) }}" class="habijabi btn btn-warning" id="habijabi" >Edit</a>
                                                 <form action="{{ route('classSchedule.destroy',$CS->id) }}" method="post">

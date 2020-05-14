@@ -26,7 +26,7 @@
 
         <div class="panel-body">
             <h3 class="text-center m-t-0 m-b-30">
-                <span class=""><img src="{{ asset('assets/admin/images/DIU.png')}}" alt="logo" height="32"></span>
+                <span class=""><img src="{{ asset('image/diu1.png')}}" alt="logo" height="32"></span>
             </h3>
             <h4 class="text-muted text-center m-t-0"><b>Sign In</b></h4>
 
