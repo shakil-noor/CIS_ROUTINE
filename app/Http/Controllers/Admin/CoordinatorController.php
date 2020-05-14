@@ -95,7 +95,7 @@ class CoordinatorController extends Controller
             'name' => 'required',
             'department_id' => 'required',
             'email' => 'required|email|unique:coordinators,email,'.$id,
-            'username' => 'required|max:30|unique:coordinators,name'.$id,
+            'username' => 'required|max:30|unique:coordinators,username,'.$id,
         ]);
         $data = $request->except('_token');
         $data['name'] = ucfirst($request->name);

@@ -1,5 +1,5 @@
 @extends('layouts.coordinators.master')
-@section('title','New class Schedule create')
+@section('title','Edit Class Schedule')
 @section('content')
     <!-- Page-Title or brad-cum-->
     <div class="row">
@@ -8,7 +8,7 @@
                 <h4 class="pull-left page-title">Class Schedule</h4>
                 <ol class="breadcrumb pull-right">
                     <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                    <li><a href="">Class Schedule create</a></li>
+                    <li><a href="">Class Schedule Edit</a></li>
                 </ol>
                 <div class="clearfix"></div>
             </div>
@@ -19,23 +19,23 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-primary">
-                <div class="panel-heading"><h3 class="panel-title">Class Schedule create form</h3></div>
+                <div class="panel-heading"><h3 class="panel-title">Class Schedule Update form</h3></div>
                 <div class="panel-body">
-                    <form class="form-horizontal" action="{{route('schedule.store')}}" method="post" role="form" enctype= multipart/form-data>
+                    <form class="form-horizontal" action="{{route('schedule.update',$classSchedule->id)}}" method="post" role="form" enctype= multipart/form-data>
                         @csrf
+                        @method('put')
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Day</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="day" id="day">
-                                    <option>Select Day</option>
-                                    <option value="Saturday">Saturday</option>
-                                    <option value="Sunday">Sunday</option>
-                                    <option value="Monday">Monday</option>
-                                    <option value="Tuesday">Tuesday</option>
-                                    <option value="Wednesday">Wednesday</option>
-                                    <option value="Thursday">Thursday</option>
+                                    <option @if($classSchedule->day == 'Saturday') selected @endif value="Saturday">Saturday</option>
+                                    <option @if($classSchedule->day == 'Sunday') selected @endif value="Sunday">Sunday</option>
+                                    <option @if($classSchedule->day == 'Monday') selected @endif value="Monday">Monday</option>
+                                    <option @if($classSchedule->day == 'Tuesday') selected @endif value="Tuesday">Tuesday</option>
+                                    <option @if($classSchedule->day == 'Wednesday') selected @endif value="Wednesday">Wednesday</option>
+                                    <option @if($classSchedule->day == 'Thursday') selected @endif value="Thursday">Thursday</option>
                                 </select>
-                                @error('day')
+                                @error('course_type')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -44,7 +44,7 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label">Start Time</label>
                             <div class="col-md-10">
-                                <input type="time" value="{{ old('start_time') }}" name="start_time" id="start_time" class="form-control" placeholder="Start Time" required>
+                                <input type="time" value="{{ $classSchedule->start_time }}" name="start_time" id="start_time" class="form-control" placeholder="Start Time" required>
                                 @error('start_time')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -54,18 +54,22 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label">End Time</label>
                             <div class="col-md-10">
-                                <input type="time" value="{{ old('end_time') }}" name="end_time" id="end_time" class="form-control" placeholder="End Time" required>
+                                <input type="time" value="{{ $classSchedule->end_time }}" name="end_time" id="end_time" class="form-control" placeholder="End Time" required>
                                 @error('end_time')
                                 <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
 
+
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Course</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="course_id" id="course">
-                                    <option value="">Select Course</option>
+                                    <option selected value="{{ $classSchedule->course_id }}">{{ $classSchedule->course->title }}</option>
+                                    @foreach($courses as $course)
+                                        <option value="{{ $course->id }}">{{ $course->title }}</option>
+                                    @endforeach
                                 </select>
                                 @error('course_id')
                                 <div class="text-danger">{{ $message }}</div>
@@ -77,7 +81,10 @@
                             <label class="col-sm-2 control-label">Room</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="room_id" id="room">
-                                    <option value="">Select Room</option>
+                                    <option value="{{ $classSchedule->room_id}}" selected >{{ $classSchedule->room->room_no.'('.$classSchedule->room->capacity.')' }}</option>
+                                    @foreach($rooms as $room)
+                                        <option value="{{ $room->id }}">{{ $room->room_no.'('.$room->capacity.')' }}</option>
+                                    @endforeach
                                 </select>
                                 @error('room_id')
                                 <div class="text-danger">{{ $message }}</div>
@@ -89,7 +96,10 @@
                             <label class="col-sm-2 control-label">Teacher</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="teacher_id" id="teacher">
-                                    <option value="">Select Teacher</option>
+                                    <option value="{{ $classSchedule->teacher_id }} ">{{  $classSchedule->teacher->name }}   </option>
+                                    @foreach($teachers as $teacher)
+                                        <option value="{{ $teacher->id }}">{{  $teacher->name }}   </option>
+                                    @endforeach
                                 </select>
                                 @error('teacher_id')
                                 <div class="text-danger">{{ $message }}</div>
@@ -97,11 +107,18 @@
                             </div>
                         </div>
 
+
+
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Batches</label>
                             <div class="col-sm-10">
-                                <select class="form-control" multiple  name="batches[]" id="batches" multiple="multiple">
-                                    <option value="">Select Batches</option>
+                                <select class="form-control" multiple  name="batches[]" id="batches" >
+                                    @foreach($classSchedule->batchSchedule as $bt)
+                                        <option selected value="{{ $bt->batch_id }}">{{ $bt->batch->name }}</option>
+                                    @endforeach
+                                    @foreach($batches as $bt)
+                                        <option  value="{{ $bt->id }}">{{ $bt->name }}</option>
+                                    @endforeach
                                 </select>
                                 @error('batches')
                                 <div class="text-danger">{{ $message }}</div>
@@ -125,15 +142,19 @@
                     var start_time = $('#start_time').val();
                     var end_time = $('#end_time').val();
 
+                    //console.log({day:day, start_time:start_time,end_time:end_time});
                     if (!!day && !!start_time  && !!end_time){
+                        //console.log('true');
+
                         $.ajax({
                             type:'GET',
-                            url: '{{route('coordinator.scheduleRequest')}}',
+                            url: '{{route('ScheduleRequest')}}',
                             data: {day:day, start_time:start_time,end_time:end_time},
                             dataType: 'json',
                             success:function(responce){
-                                $('#course').html('<option value="">Select Course</option>');
+                                $('#course').html('<option selected value="{{ $classSchedule->course_id }}">{{ $classSchedule->course->title }}</option>');
                                 var len = responce.courses.length;
+
                                 for (var i = 0; i < len; i++) {
                                     var course_title = responce.courses[i].title;
                                     var course_id = responce.courses[i].id;
@@ -141,16 +162,18 @@
                                     $("#course").append(tr_str);
                                 }
 
-                                $('#room').html('<option value="">Select Room</option>');
+                                $('#room').html('<option selected value="{{  $classSchedule->room_id }}">{{  $classSchedule->room->room_no }}</option>');
                                 var len = responce.rooms.length;
+                                //alert(len);
                                 for (var i = 0; i < len; i++) {
                                     var room_id = responce.rooms[i].id;
                                     var room_no = responce.rooms[i].room_no;
-                                    var tr_str = "<option value="+room_id+">"+room_no+"</option>";
+                                    var capacity = responce.rooms[i].capacity;
+                                    var tr_str = "<option value="+room_id+">"+room_no+ "("+ capacity +")"+ "</option>";
                                     $("#room").append(tr_str);
                                 }
 
-                                $('#teacher').html('<option value="">Select Teacher</option>');
+                                $('#teacher').html('<option selected value="{{  $classSchedule->teacher_id }}">{{  $classSchedule->teacher->name }}</option>');
                                 var len = responce.teachers.length;
                                 for (var i = 0; i < len; i++) {
                                     var teacher_name = responce.teachers[i].name;
@@ -162,6 +185,9 @@
                                 $('#batches').html();
                                 var len = responce.batches.length;
                                 document.getElementById("batches").innerHTML = "";
+                                @foreach($classSchedule->batchSchedule as $bt)
+                                $("#batches").append("<option selected value='{{ $bt->batch_id }}'>{{ $bt->batch->name }}</option>");
+                                        @endforeach
                                 for (var i = 0; i < len; i++) {
                                     var batch_id = responce.batches[i].id;
                                     var batch_name = responce.batches[i].name;
@@ -176,5 +202,3 @@
         });
     </script>
 @endsection
-
-

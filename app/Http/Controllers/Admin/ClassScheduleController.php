@@ -213,7 +213,7 @@ class ClassScheduleController extends Controller
             'room_id' => 'required|integer',
             'teacher_id' => 'required|integer',
             'semester_id' => 'required|integer',
-            'batches.*' => 'required|integer',
+            'batches' => 'required|array',
         ]);
 
         DB::beginTransaction();
@@ -330,7 +330,7 @@ class ClassScheduleController extends Controller
             'room_id' => 'required|integer',
             'teacher_id' => 'required|integer',
             'semester_id' => 'required|integer',
-            'batches.*' => 'required|integer',
+            'batches' => 'required|array',
         ]);
 
         DB::beginTransaction();

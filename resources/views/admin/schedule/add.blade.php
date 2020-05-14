@@ -60,6 +60,7 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Department</label>
                             <div class="col-sm-10">
@@ -137,7 +138,6 @@
                                 @enderror
                             </div>
                         </div>
-
 
                         <input type="submit"  class="btn btn-info full-right" value="Submit">
                     </form>
