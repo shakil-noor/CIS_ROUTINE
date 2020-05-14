@@ -18,7 +18,7 @@
         <div class="col-md-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Class Schedule List</h3>
+                    <h3 class="panel-title">Class Schedule List </h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -35,6 +35,8 @@
                                         <th>Room</th>
                                         <th>Teacher</th>
                                         <th>Batches</th>
+                                        <th>Created By</th>
+                                        <th>Updated By</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -53,6 +55,8 @@
                                                     {{ $bs->batch->name }},
                                                 @endforeach
                                             </td>
+                                            <td>{{ $CS->created_by }}</td>
+                                            <td>{{ $CS->updated_by }}</td>
                                             <td>
                                                 <a type="button" href="{{ route('schedule.edit',$CS->id) }}" class="habijabi btn btn-warning" id="habijabi" >Edit</a>
                                                 <form action="{{ route('schedule.destroy',$CS->id) }}" method="post">

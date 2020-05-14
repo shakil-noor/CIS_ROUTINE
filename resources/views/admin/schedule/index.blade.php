@@ -36,6 +36,8 @@
                                         <th>Room</th>
                                         <th>Teacher</th>
                                         <th>Batches</th>
+                                        <th>Created By</th>
+                                        <th>Updated By</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -54,6 +56,8 @@
                                                     {{ $bs->batch->name }},
                                                      @endforeach
                                             </td>
+                                            <td>{{ $CS->created_by }}</td>
+                                            <td>{{ $CS->updated_by }}</td>
                                             <td>
                                                 <a type="button" href="{{ route('classSchedule.edit',$CS->id) }}" class="habijabi btn btn-warning" id="habijabi" >Edit</a>
                                                 <form action="{{ route('classSchedule.destroy',$CS->id) }}" method="post">
