@@ -23,7 +23,6 @@
                                 @foreach($teachers as $key => $teacher)
                                     <tr>
                                         <td>{{ $teachers->firstItem() + $key }}</td>
-                                        {{--<td></td>--}}
                                         <td>{{ $teacher->name }}</td>
                                         <td><a type="button" target="_blank" href="{{ route('coordinator.teacherSchedule', $teacher->id) }}" class="btn btn-primary">View</a></td>
                                         <td><a type="button" target="_blank" href="{{ route('coordinator.teacherSchedulePDF', $teacher->id) }}" class="btn btn-info">PDF</a></td>

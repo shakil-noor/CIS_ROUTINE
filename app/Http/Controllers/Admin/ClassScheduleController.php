@@ -32,37 +32,46 @@ class ClassScheduleController extends Controller
 
     public function teacherSchedule($id){
         $data['teacher'] = Teacher::findOrFail($id);
-        $data['saturday'] = ClassSchedule::orderBy('start_time','ASC')
-            ->where([['day','=','saturday'],['teacher_id','=', $id]])
-            ->Where('semesters.status','=','Active')
-            ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
-            ->get();
+//        $data['saturday'] = ClassSchedule::with('course','room','batchSchedule')
+//            ->orderBy('start_time','ASC')
+//            ->where([['day','=','saturday'],['teacher_id','=', $id]])
+//            // ->Where('semesters.status','=','Active')
+//            // ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
+//            ->get();
 
-        $data['sunday'] = ClassSchedule::orderBy('start_time','ASC')
+             $data['saturday'] = ClassSchedule::with(['batchSchedule'=>function($query){
+                 return $query->with(['batch'])->get();
+             }])->orderBy('start_time','ASC')
+             ->where([['day','=','saturday'],['teacher_id','=', $id]])
+             //->Where('semesters.status','=','Active')
+             //->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
+             ->get();
+
+        $data['sunday'] = ClassSchedule::with('course','room')->orderBy('start_time','ASC')
             ->where([['day','=','sunday'],['teacher_id', '=', $id]])
             ->Where('semesters.status','=','Active')
             ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
             ->get();
 
-        $data['monday'] = ClassSchedule::orderBy('start_time','ASC')
+        $data['monday'] = ClassSchedule::with('course','room')->orderBy('start_time','ASC')
             ->where([['day','=','monday'],['teacher_id', '=',$id]])
             ->Where('semesters.status','=','Active')
             ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
             ->get();
 
-        $data['tuesday'] = ClassSchedule::orderBy('start_time','ASC')
+        $data['tuesday'] = ClassSchedule::with('course','room')->orderBy('start_time','ASC')
             ->where([['day','=','monday'],['teacher_id', '=', $id]])
             ->Where('semesters.status','=','Active')
             ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
             ->get();
 
-        $data['wednesday'] = ClassSchedule::orderBy('start_time','ASC')
+        $data['wednesday'] = ClassSchedule::with('course','room')->orderBy('start_time','ASC')
             ->where([['day','=','wednesday'],['teacher_id', '=',$id]])
             ->Where('semesters.status','=','Active')
             ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
             ->get();
 
-        $data['thursday'] = ClassSchedule::orderBy('start_time','ASC')
+        $data['thursday'] = ClassSchedule::with('course','room')->orderBy('start_time','ASC')
             ->where([['day','=','thursday'],['teacher_id', '=', $id]])
             ->Where('semesters.status','=','Active')
             ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
@@ -72,7 +81,7 @@ class ClassScheduleController extends Controller
     }
     public function batchSchedule($id){
         $data['batch'] = Batch::findOrFail($id);
-        $data['saturday'] = ClassSchedule::orderBy('start_time','ASC')
+        $data['saturday'] = ClassSchedule::with('batchSchedule')->orderBy('start_time','ASC')
             ->where([['day','=','saturday']])
             ->where('batches.id','=',$id)
             ->where('semesters.status','=','Active')
@@ -80,7 +89,7 @@ class ClassScheduleController extends Controller
             ->join('batches','batches.id', '=', 'batch_schedules.batch_id')
             ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
             ->get();
-        $data['sunday'] = ClassSchedule::orderBy('start_time','ASC')
+        $data['sunday'] = ClassSchedule::with('batchSchedule')->orderBy('start_time','ASC')
             ->where('day','=','sunday')
             ->where('batches.id','=',$id)
             ->where('semesters.status','=','Active')
@@ -88,7 +97,7 @@ class ClassScheduleController extends Controller
             ->join('batches','batches.id', '=', 'batch_schedules.batch_id')
             ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
             ->get();
-        $data['monday'] = ClassSchedule::orderBy('start_time','ASC')
+        $data['monday'] = ClassSchedule::with('batchSchedule')->orderBy('start_time','ASC')
             ->where('day','=','monday')
             ->where('batches.id','=',$id)
             ->where('semesters.status','=','Active')
@@ -96,7 +105,7 @@ class ClassScheduleController extends Controller
             ->join('batches','batches.id', '=', 'batch_schedules.batch_id')
             ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
             ->get();
-        $data['tuesday'] = ClassSchedule::orderBy('start_time','ASC')
+        $data['tuesday'] = ClassSchedule::with('batchSchedule')->orderBy('start_time','ASC')
             ->where('day','=','tuesday')
             ->where('batches.id','=',$id)
             ->where('semesters.status','=','Active')
@@ -104,7 +113,7 @@ class ClassScheduleController extends Controller
             ->join('batches','batches.id', '=', 'batch_schedules.batch_id')
             ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
             ->get();
-        $data['wednesday'] = ClassSchedule::orderBy('start_time','ASC')
+        $data['wednesday'] = ClassSchedule::with('batchSchedule')->orderBy('start_time','ASC')
             ->where('day','=','wednesday')
             ->where('batches.id','=',$id)
             ->where('semesters.status','=','Active')
@@ -112,7 +121,7 @@ class ClassScheduleController extends Controller
             ->join('batches','batches.id', '=', 'batch_schedules.batch_id')
             ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
             ->get();
-        $data['thursday'] = ClassSchedule::orderBy('start_time','ASC')
+        $data['thursday'] = ClassSchedule::with('batchSchedule')->orderBy('start_time','ASC')
             ->where('day','=','thursday')
             ->where('batches.id','=',$id)
             ->where('semesters.status','=','Active')

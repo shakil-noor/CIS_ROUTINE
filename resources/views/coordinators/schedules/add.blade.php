@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-
+    @include("layouts.coordinators._message")
     {{--form start--}}
     <div class="row">
         <div class="col-sm-12">

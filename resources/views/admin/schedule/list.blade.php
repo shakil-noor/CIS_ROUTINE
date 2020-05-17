@@ -23,14 +23,16 @@
                                 @foreach($teachers as $key => $T)
                                     <tr>
                                         <td>{{ $teachers->firstItem() + $key }}</td>
-                                        {{--<td></td>--}}
                                         <td>{{ $T->name }}</td>
-                                        <td><a type="button" href="{{ route('admin.teacherSchedule', $T->id) }}" class="btn btn-primary">View</a></td>
+                                        <td><a type="button" href="{{ route('admin.teacherSchedule', $T->id) }}" target="_blank" class="btn btn-primary">View</a></td>
                                         <td><a type="button" href="{{ route('teacherSchedulePDF', $T->id) }}" class="btn btn-info">PDF</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
+                            <div class="text-center">
+                                {{ $teachers->render() }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -58,19 +60,20 @@
                                 @foreach($batches as $key => $b)
                                     <tr>
                                         <td>{{ $batches->firstItem() + $key }}</td>
-                                        {{--<td>1</td>--}}
                                         <td>{{ $b->name }}</td>
-                                        <td><a type="button" target="_blank" href="{{ route('admin.batchSchedule',$b->id) }}" class="btn btn-primary">View</a></td>
+                                        <td><a type="button" target="_blank" href="{{ route('admin.batchSchedule',$b->id) }}" target="_blank" class="btn btn-primary">View</a></td>
                                         <td><a type="button" href="" class="btn btn-info">PDF</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
+                            <div class="text-center">
+                                {{ $batches->render() }}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div> <!-- End Row -->
-
 @endsection

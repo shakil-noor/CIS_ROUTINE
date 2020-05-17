@@ -11,7 +11,7 @@ class BatchSchedule extends Model
     ];
 
     public function classSchedule(){
-        return $this->belongsTo(ClassSchedule::class,'schedule_id');
+        return $this->belongsTo(ClassSchedule::class,'class_schedule_id');
     }
     public function batch(){
         return $this->belongsTo(Batch::class,'batch_id');

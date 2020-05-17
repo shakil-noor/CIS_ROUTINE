@@ -37,7 +37,6 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
         $request->validate([
             'title' => 'required|unique:courses',
             'short_name' => 'required|max:10|unique:courses',

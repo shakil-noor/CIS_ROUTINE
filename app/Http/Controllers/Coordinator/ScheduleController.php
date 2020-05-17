@@ -40,7 +40,7 @@ class ScheduleController extends Controller
             ->where([['day','=','saturday'],['teacher_id','=', $id]])
             ->Where('semesters.status','=','Active')
             ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
-            ->get();
+            ->first();
 
         $data['sunday'] = ClassSchedule::orderBy('start_time','ASC')
             ->where([['day','=','sunday'],['teacher_id', '=', $id]])
@@ -76,7 +76,7 @@ class ScheduleController extends Controller
     }
     public function batchSchedule($id){
         $data['batch'] = Batch::findOrFail($id);
-        $data['saturday'] = ClassSchedule::orderBy('start_time','ASC')
+        $data['saturday'] = ClassSchedule::with('batchSchedule')->orderBy('start_time','ASC')
             ->where([['day','=','saturday']])
             ->where('batches.id','=',$id)
             ->where('semesters.status','=','Active')
@@ -84,7 +84,7 @@ class ScheduleController extends Controller
             ->join('batches','batches.id', '=', 'batch_schedules.batch_id')
             ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
             ->get();
-        $data['sunday'] = ClassSchedule::orderBy('start_time','ASC')
+        $data['sunday'] = ClassSchedule::with('batchSchedule')->orderBy('start_time','ASC')
             ->where('day','=','sunday')
             ->where('batches.id','=',$id)
             ->where('semesters.status','=','Active')
@@ -92,7 +92,7 @@ class ScheduleController extends Controller
             ->join('batches','batches.id', '=', 'batch_schedules.batch_id')
             ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
             ->get();
-        $data['monday'] = ClassSchedule::orderBy('start_time','ASC')
+        $data['monday'] = ClassSchedule::with('batchSchedule')->orderBy('start_time','ASC')
             ->where('day','=','monday')
             ->where('batches.id','=',$id)
             ->where('semesters.status','=','Active')
@@ -100,7 +100,7 @@ class ScheduleController extends Controller
             ->join('batches','batches.id', '=', 'batch_schedules.batch_id')
             ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
             ->get();
-        $data['tuesday'] = ClassSchedule::orderBy('start_time','ASC')
+        $data['tuesday'] = ClassSchedule::with('batchSchedule')->orderBy('start_time','ASC')
             ->where('day','=','tuesday')
             ->where('batches.id','=',$id)
             ->where('semesters.status','=','Active')
@@ -108,7 +108,7 @@ class ScheduleController extends Controller
             ->join('batches','batches.id', '=', 'batch_schedules.batch_id')
             ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
             ->get();
-        $data['wednesday'] = ClassSchedule::orderBy('start_time','ASC')
+        $data['wednesday'] = ClassSchedule::with('batchSchedule')->orderBy('start_time','ASC')
             ->where('day','=','wednesday')
             ->where('batches.id','=',$id)
             ->where('semesters.status','=','Active')
@@ -116,7 +116,7 @@ class ScheduleController extends Controller
             ->join('batches','batches.id', '=', 'batch_schedules.batch_id')
             ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
             ->get();
-        $data['thursday'] = ClassSchedule::orderBy('start_time','ASC')
+        $data['thursday'] = ClassSchedule::with('batchSchedule')->orderBy('start_time','ASC')
             ->where('day','=','thursday')
             ->where('batches.id','=',$id)
             ->where('semesters.status','=','Active')
@@ -207,6 +207,23 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
+        $semesters = Semester::where("status",'=',"Active")->first();
+        if ($semesters==null){
+            session()->flash('errorMessage','No active semester found. please contact with the admin');
+            return redirect()->route('schedule.create');
+        }else{
+            $request->request->add([
+                'semester_id' => $semesters->id,
+            ]);
+        }
+
+        $deptId = auth()->user()->department_id ;
+        $creator = auth()->user()->username;
+
+        $request->request->add([
+            'department_id' => $deptId,
+            'created_by' => $creator,
+        ]);
         $request->validate([
             'day' => 'required',
             'start_time' => 'required',
@@ -216,18 +233,6 @@ class ScheduleController extends Controller
             'teacher_id' => 'required|integer',
             'batches' => 'required|array',
         ]);
-        $semesters = Semester::where("status",'=',"Active")->first();
-        $semester_id = $semesters->id;
-        $deptId = auth()->user()->department_id ;
-        $creator = auth()->user()->username;
-
-        $request->request->add([
-            'department_id' => $deptId,
-            'semester_id' => $semester_id,
-            'created_by' => $creator,
-        ]);
-
-        //dd($request->all());
 
         DB::beginTransaction();
         try {
@@ -265,8 +270,7 @@ class ScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id){
         $data['classSchedule'] = ClassSchedule::findOrFail($id);
 
         $day = $data['classSchedule']->day;
@@ -330,9 +334,7 @@ class ScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //dd($request->all());
+    public function update(Request $request, $id){
         $request->validate([
             'day' => 'required',
             'start_time' => 'required',
@@ -350,7 +352,6 @@ class ScheduleController extends Controller
 
         DB::beginTransaction();
         try {
-            //$data = $request->except('batches');
             $classSchedule = ClassSchedule::findorFail($id);
             $classSchedule->day = $request->day;
             $classSchedule->start_time = $request->start_time;
@@ -390,8 +391,7 @@ class ScheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id){
         $class = ClassSchedule::findOrFail($id);
         foreach ($class->batchSchedule as $batchSchedule) {
             $batchSchedule->delete();

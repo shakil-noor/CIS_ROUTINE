@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>document.getElementsByTagName("html")[0].className += " js";</script>
     <link href="{{ asset('assets/schedule/css/style.css') }}" rel="stylesheet" type="text/css">
-    {{-- <link href="https://codyhouse.co/demo/schedule-template/assets/css/style.css" rel="stylesheet" type="text/css"> --}}
 
     <title>CIS-Class Routine-{{ $teacher->name }}</title>
 </head>
@@ -54,10 +53,15 @@
                         <li class="cd-schedule__event">
                             <a data-start="{{ $sat->start_time }}" data-end="{{ $sat->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                 <em class="cd-schedule__name">{{ $sat->course->title }}</em>
-                                {{ $sat->room->room_no }}
+                                {{ $sat->room->room_no }} <br>
+                                @foreach($sat->batchSchedule as $bs)
+                                    {{ $bs->batch->name }},
+                                @endforeach
+
                             </a>
                         </li>
                     @endforeach
+
                 </ul>
             </li>
 
@@ -70,6 +74,7 @@
                             <a data-start="{{ $sun->start_time }}" data-end="{{ $sun->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                 <em class="cd-schedule__name">{{ $sun->course->title }}</em>
                                 {{ $sun->room->room_no }}
+                                {{ $sun->batchSchedule }}
                                 @foreach($sun->batchSchedule as $bs )
                                     {{ $bs->batch->name }},
                                 @endforeach
@@ -89,6 +94,9 @@
                             <a data-start="{{ $mon->start_time }}" data-end="{{ $mon->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                 <em class="cd-schedule__name">{{ $mon->course->title }}</em>
                                 {{ $mon->room->room_no }}
+                                @foreach($mon->batchSchedule as $bs )
+                                    {{ $bs->batch->name }},
+                                @endforeach
                             </a>
                         </li>
                     @endforeach
@@ -105,6 +113,9 @@
                             <a data-start="{{ $tues->start_time }}" data-end="{{ $tues->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                 <em class="cd-schedule__name">{{ $tues->course->title }}</em>
                                 {{ $tues->room->room_no }}
+                                @foreach($tues->batchSchedule as $bs )
+                                    {{ $bs->batch->name }},
+                                @endforeach
                             </a>
                         </li>
                     @endforeach
@@ -120,6 +131,9 @@
                             <a data-start="{{ $wed->start_time }}" data-end="{{ $wed->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                 <em class="cd-schedule__name">{{ $wed->course->title }}</em>
                                 {{ $wed->room->room_no }}
+                                @foreach($wed->batchSchedule as $bs )
+                                    {{ $bs->batch->name }},
+                                @endforeach
                             </a>
                         </li>
                     @endforeach
@@ -135,6 +149,9 @@
                             <a data-start="{{ $thrus->start_time }}" data-end="{{ $thrus->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                 <em class="cd-schedule__name">{{ $thrus->course->title }}</em>
                                 {{ $thrus->room->room_no }}
+                                @foreach($thrus->batchSchedule as $bs )
+                                    {{ $bs->batch->name }},
+                                @endforeach
                             </a>
                         </li>
                     @endforeach

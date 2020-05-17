@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-    @include("layouts.admins._message")
+    @include("layouts.coordinators._message")
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-primary">

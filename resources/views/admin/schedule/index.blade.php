@@ -71,7 +71,7 @@
                                     </tbody>
                                 </table>
                                 <div class="text-center">
-                                    {{--{{ $classSchedules->render() }}--}}
+                                    {{ $classSchedules->render() }}
                                 </div>
                             </div>
                         </div>

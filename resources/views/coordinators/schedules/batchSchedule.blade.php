@@ -54,6 +54,9 @@
                                 <a data-start="{{ $sat->start_time }}" data-end="{{ $sat->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                     <em class="cd-schedule__name">{{ $sat->course->title }}</em>
                                     {{ $sat->room->room_no }}
+                                    @foreach($sat->batchSchedule as $bt)
+                                        <span class="bt" style="display: none">{{ $bt->batch->name }}</span>
+                                    @endforeach
                                 </a>
                             </li>
                         @endforeach
@@ -69,6 +72,9 @@
                                 <a data-start="{{ $sun->start_time }}" data-end="{{ $sun->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                     <em class="cd-schedule__name">{{ $sun->course->title }}</em>
                                     {{ $sun->room->room_no }}
+                                    @foreach($sun->batchSchedule as $bt)
+                                        <span class="bt" style="display: none">{{ $bt->batch->name }}</span>
+                                    @endforeach
                                 </a>
                             </li>
                         @endforeach
@@ -85,6 +91,9 @@
                                 <a data-start="{{ $mon->start_time }}" data-end="{{ $mon->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                     <em class="cd-schedule__name">{{ $mon->course->title }}</em>
                                     {{ $mon->room->room_no }}
+                                    @foreach($mon->batchSchedule as $bt)
+                                        <span class="bt" style="display: none">{{ $bt->batch->name }}</span>
+                                    @endforeach
                                 </a>
                             </li>
                         @endforeach
@@ -101,6 +110,9 @@
                                 <a data-start="{{ $tues->start_time }}" data-end="{{ $tues->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                     <em class="cd-schedule__name">{{ $tues->course->title }}</em>
                                     {{ $tues->room->room_no }}
+                                    @foreach($tues->batchSchedule as $bt)
+                                        <span class="bt" style="display: none">{{ $bt->batch->name }}</span>
+                                    @endforeach
                                 </a>
                             </li>
                         @endforeach
@@ -116,6 +128,9 @@
                                 <a data-start="{{ $wed->start_time }}" data-end="{{ $wed->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                     <em class="cd-schedule__name">{{ $wed->course->title }}</em>
                                     {{ $wed->room->room_no }}
+                                    @foreach($wed->batchSchedule as $bt)
+                                        <span class="bt" style="display: none">{{ $bt->batch->name }}</span>
+                                    @endforeach
                                 </a>
                             </li>
                         @endforeach
@@ -131,6 +146,9 @@
                                 <a data-start="{{ $thrus->start_time }}" data-end="{{ $thrus->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                     <em class="cd-schedule__name">{{ $thrus->course->title }}</em>
                                     {{ $thrus->room->room_no }}
+                                    @foreach($thrus->batchSchedule as $bt)
+                                        <span class="bt" style="display: none">{{ $bt->batch->name }}</span>
+                                    @endforeach
                                 </a>
                             </li>
                         @endforeach

@@ -36,13 +36,11 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('guest')->except('logout');
         $this->middleware('guest:teacher')->except('logout');
         $this->middleware('guest:coordinator')->except('logout');
     }
-
     public function showTeacherLoginForm(){
         return view('auth.login', ['url' => 'teacher']);
     }

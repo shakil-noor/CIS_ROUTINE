@@ -59,8 +59,8 @@
                             <div class="col-sm-10">
                                 <select class="form-control" name="course_type">
                                     <option value="">Select Course Type</option>
-                                    <option @if(isset($course->course_type)=='Theory') selected @endif @if(old('course_type')=='Theory')selected @endif value="Theory">Theory</option>
-                                    <option @if(isset($course->course_type)=='Lab') selected @endif @if(old('course_type')=='Lab')selected @endif value="Lab">Lab</option>
+                                    <option @if(isset($course->course_type) && $course->course_type=='Theory') selected @endif @if(old('course_type')=='Theory')selected @endif value="Theory">Theory</option>
+                                    <option @if(isset($course->course_type) && $course->course_typee=='Lab') selected @endif @if(old('course_type')=='Lab')selected @endif value="Lab">Lab</option>
                                 </select>
                                 @error('course_type')
                                 <div class="text-danger">{{ $message }}</div>
@@ -73,12 +73,12 @@
                             <div class="col-sm-10">
                                 <select class="form-control" name="credit">
                                     <option>Select Credit</option>
-                                    <option @if(isset($course->credit) == '1') @endif @if(old('credit')=='1')selected @endif value="1">1</option>
-                                    <option @if(isset($course->credit) == '2') @endif @if(old('credit')=='2')selected @endif value="2">2</option>
-                                    <option @if(isset($course->credit) == '3') @endif @if(old('credit')=='3')selected @endif value="3">3</option>
-                                    <option @if(isset($course->credit) == '4') @endif @if(old('credit')=='4')selected @endif value="4">4</option>
-                                    <option @if(isset($course->credit) == '5') @endif @if(old('credit')=='5')selected @endif value="5">5</option>
-                                    <option @if(isset($course->credit) == '6') @endif @if(old('credit')=='6')selected @endif value="6">6</option>
+                                    <option @if(isset($course->credit) && $course->credit== '1') selected @endif @if(old('credit')=='1')selected @endif value="1">1</option>
+                                    <option @if(isset($course->credit) && $course->credit== '2') selected @endif @if(old('credit')=='2')selected @endif value="2">2</option>
+                                    <option @if(isset($course->credit) && $course->credit== '3') selected @endif @if(old('credit')=='3')selected @endif value="3">3</option>
+                                    <option @if(isset($course->credit) && $course->credit== '4') selected @endif @if(old('credit')=='4')selected @endif value="4">4</option>
+                                    <option @if(isset($course->credit) && $course->credit== '5') selected @endif @if(old('credit')=='5')selected @endif value="5">5</option>
+                                    <option @if(isset($course->credit) && $course->credit== '6') selected @endif @if(old('credit')=='6')selected @endif value="6">6</option>
                                 </select>
                                 @error('credit')
                                 <div class="text-danger">{{ $message }}</div>
