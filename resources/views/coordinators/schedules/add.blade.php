@@ -146,7 +146,8 @@
                                 for (var i = 0; i < len; i++) {
                                     var room_id = responce.rooms[i].id;
                                     var room_no = responce.rooms[i].room_no;
-                                    var tr_str = "<option value="+room_id+">"+room_no+"</option>";
+                                    var capacity = responce.rooms[i].capacity;
+                                    var tr_str = "<option value="+room_id+">"+room_no+ "("+ capacity +")"+ "</option>";
                                     $("#room").append(tr_str);
                                 }
 
@@ -165,7 +166,8 @@
                                 for (var i = 0; i < len; i++) {
                                     var batch_id = responce.batches[i].id;
                                     var batch_name = responce.batches[i].name;
-                                    var tr_str = "<option value="+batch_id+">"+batch_name+"</option>";
+                                    var number_of_std = responce.batches[i].num_of_std;
+                                    var tr_str = "<option value="+batch_id+">"+batch_name+ "("+ number_of_std +")"+"</option>";
                                     $("#batches").append(tr_str);
                                 }
                             }

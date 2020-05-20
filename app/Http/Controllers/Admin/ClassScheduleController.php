@@ -33,12 +33,6 @@ class ClassScheduleController extends Controller
     public function teacherSchedule($id){
         $data['teacher'] = Teacher::findOrFail($id);
 
-//            $data['saturday'] = ClassSchedule::with(['course','room','batchSchedule','semester'=>function($query){
-//                 return $query->where('status','Active');
-//            }])->orderBy('start_time','ASC')
-//            ->where([['day','=','saturday'],['teacher_id','=', $id]])
-//            ->get();
-
         $data['saturday'] = ClassSchedule::with('room','course','batchSchedule.batch')->orderBy('start_time','ASC')
             ->where([['day','=','saturday'],['teacher_id','=', $id]])
             ->Where('semesters.status','=','Active')
