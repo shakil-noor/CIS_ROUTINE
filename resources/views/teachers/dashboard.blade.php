@@ -44,6 +44,12 @@
                             <p class="text-muted"><b>Room No: </b> {{ $schedule->room->room_no }}</p>
                             <p class="text-muted"><b>Department: </b> {{ $schedule->department->name }}</p>
                             {{--<p class="text-muted"><b>15%</b> Orders in Last 10 months</p>--}}
+                            <p class="text-muted"><b>Batch: </b>
+                                @foreach($schedule->batchSchedule as $bt)
+                                    {{ $bt->batch->name }},
+                                @endforeach
+                            </p>
+
                         </div>
                     </div>
                 </div>

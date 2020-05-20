@@ -53,7 +53,7 @@
                             <li class="cd-schedule__event">
                                 <a data-start="{{ $sat->start_time }}" data-end="{{ $sat->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                     <em class="cd-schedule__name">{{ $sat->course->title }}</em>
-                                    {{ $sat->room->room_no }}
+                                    {{ $sat->room->room_no }}<br>
                                     @foreach($sat->batchSchedule as $bt)
                                         {{ $bt->batch->name }}
                                     @endforeach
@@ -71,7 +71,7 @@
                             <li class="cd-schedule__event">
                                 <a data-start="{{ $sun->start_time }}" data-end="{{ $sun->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                     <em class="cd-schedule__name">{{ $sun->course->title }}</em>
-                                    {{ $sun->room->room_no }}
+                                    {{ $sun->room->room_no }}<br>
                                     @foreach($sun->batchSchedule as $bt)
                                         {{ $bt->batch->name }}
                                     @endforeach
@@ -90,7 +90,7 @@
                             <li class="cd-schedule__event">
                                 <a data-start="{{ $mon->start_time }}" data-end="{{ $mon->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                     <em class="cd-schedule__name">{{ $mon->course->title }}</em>
-                                    {{ $mon->room->room_no }}
+                                    {{ $mon->room->room_no }}<br>
                                     @foreach($mon->batchSchedule as $bt)
                                         {{ $bt->batch->name }}
                                     @endforeach
@@ -109,7 +109,7 @@
                             <li class="cd-schedule__event">
                                 <a data-start="{{ $tues->start_time }}" data-end="{{ $tues->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                     <em class="cd-schedule__name">{{ $tues->course->title }}</em>
-                                    {{ $tues->room->room_no }}
+                                    {{ $tues->room->room_no }}<br>
                                     @foreach($tues->batchSchedule as $bt)
                                         {{ $bt->batch->name }}
                                     @endforeach
@@ -127,7 +127,7 @@
                             <li class="cd-schedule__event">
                                 <a data-start="{{ $wed->start_time }}" data-end="{{ $wed->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                     <em class="cd-schedule__name">{{ $wed->course->title }}</em>
-                                    {{ $wed->room->room_no }}
+                                    {{ $wed->room->room_no }}<br>
                                     @foreach($wed->batchSchedule as $bt)
                                         {{ $bt->batch->name }}
                                     @endforeach
@@ -145,7 +145,7 @@
                             <li class="cd-schedule__event">
                                 <a data-start="{{ $thrus->start_time }}" data-end="{{ $thrus->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                     <em class="cd-schedule__name">{{ $thrus->course->title }}</em>
-                                    {{ $thrus->room->room_no }}
+                                    {{ $thrus->room->room_no }}<br>
                                     @foreach($thrus->batchSchedule as $bt)
                                         {{ $bt->batch->name }}
                                     @endforeach

@@ -16,11 +16,12 @@ class DashboardController extends Controller
         $teacherId = auth()->user()->id;
         $weekday = date('l', strtotime(date('Y-m-d')));
 
-        $data['schedules']= ClassSchedule::where('teacher_id','=',$teacherId)
+        $data['schedules'] = ClassSchedule::with('department','room','course','batchSchedule.batch')->orderBy('start_time','ASC')
             ->where('day','=',$weekday)
+            ->where('teachers.id','=',$teacherId)
             ->where('semesters.status','=','Active')
+            ->join('teachers','teachers.id', '=', 'class_schedules.teacher_id')
             ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
-            ->select('*')
             ->get();
 
         return view('teachers.dashboard',$data);
