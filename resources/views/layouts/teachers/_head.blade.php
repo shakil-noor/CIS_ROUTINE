@@ -5,7 +5,7 @@
 <meta content="ThemeDesign" name="author" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-<link rel="shortcut icon" href="{{ asset('assets/admin/images/favicon.ico') }}">
+<link rel="shortcut icon" href="{{ asset('image/diu3.png') }}">
 
 @yield('datatablecss')
 

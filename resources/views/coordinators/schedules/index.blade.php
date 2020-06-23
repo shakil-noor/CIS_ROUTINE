@@ -1,5 +1,5 @@
 @extends('layouts.coordinators.master')
-@section('title','New Schedule create')
+@section('title','Class Schedule List')
 @section('content')
     <div class="row">
         <div class="col-sm-12">

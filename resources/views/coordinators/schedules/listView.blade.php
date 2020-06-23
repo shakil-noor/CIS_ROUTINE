@@ -16,7 +16,6 @@
                                     <th>#</th>
                                     <th>Teacher Name</th>
                                     <th>View</th>
-                                    <th>PDF</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -25,8 +24,7 @@
                                         <td>{{ $teachers->firstItem() + $key }}</td>
                                         <td>{{ $teacher->name }}</td>
                                         <td><a type="button" target="_blank" href="{{ route('coordinator.teacherSchedule', $teacher->id) }}" class="btn btn-primary">View</a></td>
-                                        <td><a type="button" target="_blank" href="{{ route('coordinator.teacherSchedulePDF', $teacher->id) }}" class="btn btn-info">PDF</a></td>
-                                    </tr>
+                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
@@ -53,7 +51,6 @@
                                     <th>#</th>
                                     <th>Batch Name</th>
                                     <th>View</th>
-                                    <th>PDF</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -62,8 +59,7 @@
                                         <td>{{ $batches->firstItem() + $key }}</td>
                                         <td>{{ $b->name }}</td>
                                         <td><a type="button" target="_blank" href="{{ route('coordinator.batchSchedule',$b->id) }}" class="btn btn-primary">View</a></td>
-                                        <td><a type="button" target="_blank" href="" class="btn btn-info">PDF</a></td>
-                                    </tr>
+                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>

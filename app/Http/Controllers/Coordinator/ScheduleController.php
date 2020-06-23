@@ -22,9 +22,11 @@ class ScheduleController extends Controller
     public function index()
     {
         $deptId = auth()->user()->department_id ;
-        $data['classSchedules'] = ClassSchedule::orderBy('id','DESC')
+        $data['classSchedules'] = ClassSchedule::orderBy('day','DESC')
             ->where('department_id','=',$deptId)
-            ->paginate(5);
+            ->Where('semesters.status','=','Active')
+            ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
+            ->paginate(9);
         return view('coordinators.schedules.index',$data);
 
     }
@@ -36,101 +38,142 @@ class ScheduleController extends Controller
 
     public function teacherSchedule($id){
         $data['teacher'] = Teacher::findOrFail($id);
-        $data['saturday'] = ClassSchedule::with('room','course','batchSchedule.batch')
-            ->orderBy('start_time','ASC')
+        $semester = Semester::where('status','=','Active')->first();
+
+        $data['saturday'] = ClassSchedule::with(['course','room','batchSchedule'=>function($query){
+            return $query->with(['batch'])->get();
+        }])->with(['semester'=>function($query){
+            return $query->where('status','=','Active')->first();
+        }])->orderBy('start_time','ASC')
             ->where([['day','=','saturday'],['teacher_id','=', $id]])
-            ->Where('semesters.status','=','Active')
-            ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
+            ->where('semester_id','=',$semester->id)
             ->get();
 
-        $data['sunday'] = ClassSchedule::with('room','course','batchSchedule.batch')
-            ->orderBy('start_time','ASC')
-            ->where([['day','=','sunday'],['teacher_id', '=', $id]])
-            ->Where('semesters.status','=','Active')
-            ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
+        $data['sunday'] = ClassSchedule::with(['course','room','batchSchedule'=>function($query){
+            return $query->with(['batch'])->get();
+        }])->with(['semester'=>function($query){
+            return $query->where('status','=','Active')->first();
+        }])->orderBy('start_time','ASC')
+            ->where([['day','=','sunday'],['teacher_id','=', $id]])
+            ->where('semester_id','=',$semester->id)
             ->get();
 
-        $data['monday'] = ClassSchedule::with('room','course','batchSchedule.batch')
-            ->orderBy('start_time','ASC')
-            ->where([['day','=','monday'],['teacher_id', '=',$id]])
-            ->Where('semesters.status','=','Active')
-            ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
+
+        $data['monday'] = ClassSchedule::with(['course','room','batchSchedule'=>function($query){
+            return $query->with(['batch'])->get();
+        }])->with(['semester'=>function($query){
+            return $query->where('status','=','Active')->first();
+        }])->orderBy('start_time','ASC')
+            ->where([['day','=','monday'],['teacher_id','=', $id]])
+            ->where('semester_id','=',$semester->id)
             ->get();
 
-        $data['tuesday'] = ClassSchedule::with('room','course','batchSchedule.batch')
-            ->orderBy('start_time','ASC')
-            ->where([['day','=','tuesday'],['teacher_id', '=', $id]])
-            ->Where('semesters.status','=','Active')
-            ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
+        $data['tuesday'] = ClassSchedule::with(['course','room','batchSchedule'=>function($query){
+            return $query->with(['batch'])->get();
+        }])->with(['semester'=>function($query){
+            return $query->where('status','=','Active')->first();
+        }])->orderBy('start_time','ASC')
+            ->where([['day','=','tuesday'],['teacher_id','=', $id]])
+            ->where('semester_id','=',$semester->id)
             ->get();
 
-        $data['wednesday'] = ClassSchedule::with('room','course','batchSchedule.batch')
-            ->orderBy('start_time','ASC')
-            ->where([['day','=','wednesday'],['teacher_id', '=',$id]])
-            ->Where('semesters.status','=','Active')
-            ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
+        $data['wednesday'] = ClassSchedule::with(['course','room','batchSchedule'=>function($query){
+            return $query->with(['batch'])->get();
+        }])->with(['semester'=>function($query){
+            return $query->where('status','=','Active')->first();
+        }])->orderBy('start_time','ASC')
+            ->where([['day','=','wednesday'],['teacher_id','=', $id]])
+            ->where('semester_id','=',$semester->id)
             ->get();
 
-        $data['thursday'] = ClassSchedule::with('room','course','batchSchedule.batch')
-            ->orderBy('start_time','ASC')
-            ->where([['day','=','thursday'],['teacher_id', '=', $id]])
-            ->Where('semesters.status','=','Active')
-            ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
+        $data['thursday'] = ClassSchedule::with(['course','room','batchSchedule'=>function($query){
+            return $query->with(['batch'])->get();
+        }])->with(['semester'=>function($query){
+            return $query->where('status','=','Active')->first();
+        }])->orderBy('start_time','ASC')
+            ->where([['day','=','thursday'],['teacher_id','=', $id]])
+            ->where('semester_id','=',$semester->id)
             ->get();
 
         return view('coordinators.schedules.teacherSchedule',$data);
     }
     public function batchSchedule($id){
         $data['batch'] = Batch::findOrFail($id);
-        $data['saturday'] = ClassSchedule::with('room','course','batchSchedule.batch')->orderBy('start_time','ASC')
-            ->where([['day','=','saturday']])
-            ->where('batches.id','=',$id)
-            ->where('semesters.status','=','Active')
-            ->join('batch_schedules','class_schedules.id', '=', 'batch_schedules.class_schedule_id')
-            ->join('batches','batches.id', '=', 'batch_schedules.batch_id')
-            ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
-            ->get();
-        $data['sunday'] = ClassSchedule::with('room','course','batchSchedule.batch')->orderBy('start_time','ASC')
-            ->where('day','=','sunday')
-            ->where('batches.id','=',$id)
-            ->where('semesters.status','=','Active')
-            ->join('batch_schedules','class_schedules.id', '=', 'batch_schedules.class_schedule_id')
-            ->join('batches','batches.id', '=', 'batch_schedules.batch_id')
-            ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
-            ->get();
-        $data['monday'] = ClassSchedule::with('room','course','batchSchedule.batch')->orderBy('start_time','ASC')
-            ->where('day','=','monday')
-            ->where('batches.id','=',$id)
-            ->where('semesters.status','=','Active')
-            ->join('batch_schedules','class_schedules.id', '=', 'batch_schedules.class_schedule_id')
-            ->join('batches','batches.id', '=', 'batch_schedules.batch_id')
-            ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
-            ->get();
-        $data['tuesday'] = ClassSchedule::with('room','course','batchSchedule.batch')->orderBy('start_time','ASC')
-            ->where('day','=','tuesday')
-            ->where('batches.id','=',$id)
-            ->where('semesters.status','=','Active')
-            ->join('batch_schedules','class_schedules.id', '=', 'batch_schedules.class_schedule_id')
-            ->join('batches','batches.id', '=', 'batch_schedules.batch_id')
-            ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
-            ->get();
-        $data['wednesday'] = ClassSchedule::with('room','course','batchSchedule.batch')->orderBy('start_time','ASC')
-            ->where('day','=','wednesday')
-            ->where('batches.id','=',$id)
-            ->where('semesters.status','=','Active')
-            ->join('batch_schedules','class_schedules.id', '=', 'batch_schedules.class_schedule_id')
-            ->join('batches','batches.id', '=', 'batch_schedules.batch_id')
-            ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
-            ->get();
-        $data['thursday'] = ClassSchedule::with('room','course','batchSchedule.batch')->orderBy('start_time','ASC')
-            ->where('day','=','thursday')
-            ->where('batches.id','=',$id)
-            ->where('semesters.status','=','Active')
-            ->join('batch_schedules','class_schedules.id', '=', 'batch_schedules.class_schedule_id')
-            ->join('batches','batches.id', '=', 'batch_schedules.batch_id')
-            ->join('semesters','class_schedules.semester_id', '=', 'semesters.id')
-            ->get();
+        $semester = Semester::where('status','=','Active')->first();
+        $btch = BatchSchedule::where('batch_id','=',$id)->get();
 
+        $saturday = array();
+        foreach ($btch as $bt) {
+            $cls = ClassSchedule::with(['batchSchedule'=>function($query){
+                return $query->with(['batch'])->get();
+            }])->where('id','=',$bt->class_schedule_id)
+                ->where('semester_id','=',$semester->id)
+                ->where('day','=','saturday')
+                ->first();
+            array_push($saturday,$cls);
+        }
+        $data['saturday'] = $saturday;
+
+        $sunday = array();
+        foreach ($btch as $bt) {
+            $cls = ClassSchedule::with(['batchSchedule'=>function($query){
+                return $query->with(['batch'])->first();
+            }])->where('id','=',$bt->class_schedule_id)
+                ->where('semester_id','=',$semester->id)
+                ->where('day','=','sunday')
+                ->first();
+            array_push($sunday,$cls);
+        }
+        $data['sunday'] = $sunday;
+        //dd($data['sunday']);
+
+        $monday = array();
+        foreach ($btch as $bt) {
+            $cls = ClassSchedule::with(['batchSchedule'=>function($query){
+                return $query->with(['batch'])->first();
+            }])->where('id','=',$bt->class_schedule_id)
+                ->where('semester_id','=',$semester->id)
+                ->where('day','=','monday')
+                ->first();
+            array_push($monday,$cls);
+        }
+        $data['monday'] = $monday;
+
+        $tuesday = array();
+        foreach ($btch as $bt) {
+            $cls = ClassSchedule::with(['batchSchedule'=>function($query){
+                return $query->with(['batch'])->first();
+            }])->where('id','=',$bt->class_schedule_id)
+                ->where('semester_id','=',$semester->id)
+                ->where('day','=','tuesday')
+                ->first();
+            array_push($tuesday,$cls);
+        }
+        $data['tuesday'] = $tuesday;
+
+        $wednesday = array();
+        foreach ($btch as $bt) {
+            $cls = ClassSchedule::with(['batchSchedule'=>function($query){
+                return $query->with(['batch'])->first();
+            }])->where('id','=',$bt->class_schedule_id)
+                ->where('semester_id','=',$semester->id)
+                ->where('day','=','wednesday')
+                ->first();
+            array_push($wednesday,$cls);
+        }
+        $data['wednesday'] = $wednesday;
+
+        $thursday = array();
+        foreach ($btch as $bt) {
+            $cls = ClassSchedule::with(['batchSchedule'=>function($query){
+                return $query->with(['batch'])->first();
+            }])->where('id','=',$bt->class_schedule_id)
+                ->where('semester_id','=',$semester->id)
+                ->where('day','=','thursday')
+                ->first();
+            array_push($thursday,$cls);
+        }
+        $data['thursday'] = $thursday;
         return view('coordinators.schedules.batchSchedule',$data);
     }
 

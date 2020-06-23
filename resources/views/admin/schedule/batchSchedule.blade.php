@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>document.getElementsByTagName("html")[0].className += " js";</script>
     <link href="{{ asset('assets/schedule/css/style.css') }}" rel="stylesheet" type="text/css">
-    {{-- <link href="https://codyhouse.co/demo/schedule-template/assets/css/style.css" rel="stylesheet" type="text/css"> --}}
-
     <title>CIS-Class Routine-{{ $batch->name }}</title>
 </head>
 <body>
-<div id="printableArea">
+<div class="cd-main-header flex flex-column flex-center">
+    <button id="capture" class="btn" style="background-color: #45aaf2; color: white;margin: 30px;">Download Image 🔽</button>
+</div>
+<div id="capture-area" style="background-color:white">
     <header class="cd-main-header text-center flex flex-column flex-center">
-        <h1 class="text-xl">Class Schedule of {{ $batch->name }}</h1>
-        {{--<button onclick="window.print()">Print</button>--}}
-        <input type="button" onclick="printDiv('printableArea')" value="print a div!" />
+        <h1 class="text-xl">Class Schedule of "{{ $batch->name }}" batch</h1>
     </header>
 
     <div class="cd-schedule cd-schedule--loading margin-top-lg margin-bottom-lg js-cd-schedule">
@@ -47,18 +46,19 @@
 
                 <li class="cd-schedule__group">
                     <div class="cd-schedule__top-info"><span>Saturday</span></div>
-
                     <ul>
                         @foreach($saturday as  $sat)
+                            @if($sat !=null)
                             <li class="cd-schedule__event">
                                 <a data-start="{{ $sat->start_time }}" data-end="{{ $sat->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
                                     <em class="cd-schedule__name">{{ $sat->course->title }}</em>
                                     {{ $sat->room->room_no }}<br>
                                     @foreach($sat->batchSchedule as $bt)
-                                        {{ $bt->batch->name }}
+                                        {{ $bt->batch->name }},
                                     @endforeach
                                 </a>
                             </li>
+                            @endif
                         @endforeach
                     </ul>
                 </li>
@@ -68,15 +68,17 @@
 
                     <ul>
                         @foreach($sunday as  $sun)
-                            <li class="cd-schedule__event">
-                                <a data-start="{{ $sun->start_time }}" data-end="{{ $sun->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                                    <em class="cd-schedule__name">{{ $sun->course->title }}</em>
-                                    {{ $sun->room->room_no }}<br>
-                                    @foreach($sun->batchSchedule as $bt)
-                                        {{ $bt->batch->name }}
-                                    @endforeach
-                                </a>
-                            </li>
+                            @if($sun !=null)
+                                <li class="cd-schedule__event">
+                                    <a data-start="{{ $sun->start_time }}" data-end="{{ $sun->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
+                                        <em class="cd-schedule__name">{{ $sun->course->title }}</em>
+                                        {{ $sun->room->room_no }}<br>
+                                        @foreach($sun->batchSchedule as $bt)
+                                            {{ $bt->batch->name }},
+                                        @endforeach
+                                    </a>
+                                </li>
+                            @endif
                         @endforeach
 
                     </ul>
@@ -87,15 +89,17 @@
 
                     <ul>
                         @foreach($monday as  $mon)
-                            <li class="cd-schedule__event">
-                                <a data-start="{{ $mon->start_time }}" data-end="{{ $mon->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                                    <em class="cd-schedule__name">{{ $mon->course->title }}</em>
-                                    {{ $mon->room->room_no }}<br>
-                                    @foreach($mon->batchSchedule as $bt)
-                                        {{ $bt->batch->name }}
-                                    @endforeach
-                                </a>
-                            </li>
+                            @if($mon !=null)
+                                <li class="cd-schedule__event">
+                                    <a data-start="{{ $mon->start_time }}" data-end="{{ $mon->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
+                                        <em class="cd-schedule__name">{{ $mon->course->title }}</em>
+                                        {{ $mon->room->room_no }}<br>
+                                        @foreach($mon->batchSchedule as $bt)
+                                            {{ $bt->batch->name }},
+                                        @endforeach
+                                    </a>
+                                </li>
+                            @endif
                         @endforeach
                     </ul>
                 </li>
@@ -106,15 +110,17 @@
                     <ul>
 
                         @foreach($tuesday as  $tues)
-                            <li class="cd-schedule__event">
-                                <a data-start="{{ $tues->start_time }}" data-end="{{ $tues->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                                    <em class="cd-schedule__name">{{ $tues->course->title }}</em>
-                                    {{ $tues->room->room_no }}<br>
-                                    @foreach($tues->batchSchedule as $bt)
-                                        {{ $bt->batch->name }}
-                                    @endforeach
-                                </a>
-                            </li>
+                            @if($tues !=null)
+                                <li class="cd-schedule__event">
+                                    <a data-start="{{ $tues->start_time }}" data-end="{{ $tues->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
+                                        <em class="cd-schedule__name">{{ $tues->course->title }}</em>
+                                        {{ $tues->room->room_no }}<br>
+                                        @foreach($tues->batchSchedule as $bt)
+                                            {{ $bt->batch->name }},
+                                        @endforeach
+                                    </a>
+                                </li>
+                            @endif
                         @endforeach
                     </ul>
                 </li>
@@ -124,15 +130,18 @@
 
                     <ul>
                         @foreach($wednesday as  $wed)
-                            <li class="cd-schedule__event">
-                                <a data-start="{{ $wed->start_time }}" data-end="{{ $wed->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                                    <em class="cd-schedule__name">{{ $wed->course->title }}</em>
-                                    {{ $wed->room->room_no }}<br>
-                                    @foreach($wed->batchSchedule as $bt)
-                                        {{ $bt->batch->name }}
-                                    @endforeach
-                                </a>
-                            </li>
+                            @if($wed !=null)
+                                <li class="cd-schedule__event">
+                                    <a data-start="{{ $wed->start_time }}" data-end="{{ $wed->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
+                                        <em class="cd-schedule__name">{{ $wed->course->title }}</em>
+                                        {{ $wed->room->room_no }}<br>
+                                        @foreach($wed->batchSchedule as $bt)
+                                            {{ $bt->batch->name }},
+                                        @endforeach
+
+                                    </a>
+                                </li>
+                            @endif
                         @endforeach
                     </ul>
                 </li>
@@ -142,15 +151,17 @@
 
                     <ul>
                         @foreach($thursday as  $thrus)
-                            <li class="cd-schedule__event">
-                                <a data-start="{{ $thrus->start_time }}" data-end="{{ $thrus->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
-                                    <em class="cd-schedule__name">{{ $thrus->course->title }}</em>
-                                    {{ $thrus->room->room_no }}<br>
-                                    @foreach($thrus->batchSchedule as $bt)
-                                        {{ $bt->batch->name }}
-                                    @endforeach
-                                </a>
-                            </li>
+                            @if($thrus !=null)
+                                <li class="cd-schedule__event">
+                                    <a data-start="{{ $thrus->start_time }}" data-end="{{ $thrus->end_time }}" data-content="event-abs-circuit" data-event="event-1" href="#0">
+                                        <em class="cd-schedule__name">{{ $thrus->course->title }}</em>
+                                        {{ $thrus->room->room_no }}<br>
+                                        @foreach($thrus->batchSchedule as $bt)
+                                            {{ $bt->batch->name }},
+                                        @endforeach
+                                    </a>
+                                </li>
+                            @endif
                         @endforeach
                     </ul>
                 </li>
@@ -180,21 +191,15 @@
         <div class="cd-schedule__cover-layer"></div>
     </div> <!-- .cd-schedule -->
 </div>
-<script>
-    function printDiv(divName) {
-        var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
 
-        document.body.innerHTML = printContents;
-
-        window.print();
-
-        document.body.innerHTML = originalContents;
-    }
-</script>
-{{--<script src="assets/js/util.js"></script> <!-- util functions included in the CodyHouse framework -->--}}
 {{--<script src="assets/js/main.js"></script>--}}
 <script src="{{ asset('assets/schedule/js/util.js')}}"></script>
 <script src="{{ asset('assets/schedule/js/main.js')}}"></script>
+
+{{-- take screen short of the schedule page and dowonlaod the the image --}}
+<script src="{{ asset('assets/schedule/js/jquery.min.js')}}"></script>
+<script src="{{ asset('assets/schedule/js/dom-to-image.js')}}"></script>
+<script src="{{ asset('assets/schedule/js/FileSaver.js')}}"></script>
+@include('layouts.scheduleImageDownloadScript')
 </body>
 </html>

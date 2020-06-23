@@ -31,9 +31,9 @@
             <h4 class="text-muted text-center m-t-0"><b>Sign In</b></h4>
 
                 @isset($url)
-                <form method="POST" class="form-horizontal m-t-20" action='{{ url("login/$url") }}' aria-label="{{ __('Login') }}">
-                        @else
-                            <form method="POST" class="form-horizontal m-t-20" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+                    <form method="POST" class="form-horizontal m-t-20" action='{{ url("login/$url") }}' aria-label="{{ __('Login') }}">
+                @else
+                    <form method="POST" class="form-horizontal m-t-20" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                 @endisset
                 @csrf
                 <div class="form-group">

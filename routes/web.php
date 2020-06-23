@@ -22,6 +22,10 @@ Route::post('/login/teacher', 'Auth\LoginController@teacherLogin');
 Route::get('/login/coordinator', 'Auth\LoginController@showCoordinatorLoginForm')->name('coordinator.showLogin');
 Route::post('/login/coordinator', 'Auth\LoginController@coordinatorLogin');
 
+Route::get('/ImageCapture', function () {
+    return view('layouts.save-capture');
+})->name('saveImage');
+
 //Admin
 Route::group(['middleware' =>'auth','prefix'=>'admin', 'namespace'=>'Admin'],function (){
     Route::get('dashboard','DashboardController@dashboard')->name('admin.dashboard');
@@ -42,9 +46,6 @@ Route::group(['middleware' =>'auth','prefix'=>'admin', 'namespace'=>'Admin'],fun
     Route::resource('adminProfile','ProfileController');
     Route::get('changePassword','ProfileController@passwordEdit')->name('admin.passwordEdit');
     Route::put('passwordUpdate/{id}','ProfileController@passwordUpdate')->name('admin.passwordUpdate');
-
-
-    Route::get('teacherSchedulePDF/{id}','PDFController@teacherSchedulePDF')->name('teacherSchedulePDF');;
 });
 
 //Teacher
@@ -69,7 +70,6 @@ Route::group(['middleware' =>'auth:coordinator','prefix'=>'coordinator', 'namesp
     Route::resource('coordinatorProfile','profileController');
     Route::get('changePassword','profileController@passwordEdit')->name('coordinator.passwordEdit');
     Route::put('passwordUpdate/{id}','profileController@passwordUpdate')->name('coordinator.passwordUpdate');
-    Route::get('teacherSchedulePDF/{id}','PDFController@teacherSchedulePDF')->name('coordinator.teacherSchedulePDF');;
 });
 
 

@@ -16,7 +16,6 @@
                                     <th>#</th>
                                     <th>Teacher Name</th>
                                     <th>View</th>
-                                    <th>PDF</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -25,7 +24,6 @@
                                         <td>{{ $teachers->firstItem() + $key }}</td>
                                         <td>{{ $T->name }}</td>
                                         <td><a type="button" href="{{ route('admin.teacherSchedule', $T->id) }}" target="_blank" class="btn btn-primary">View</a></td>
-                                        <td><a type="button" href="{{ route('teacherSchedulePDF', $T->id) }}" class="btn btn-info">PDF</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -53,7 +51,6 @@
                                     <th>#</th>
                                     <th>Batch Name</th>
                                     <th>View</th>
-                                    <th>PDF</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -62,8 +59,7 @@
                                         <td>{{ $batches->firstItem() + $key }}</td>
                                         <td>{{ $b->name }}</td>
                                         <td><a type="button" target="_blank" href="{{ route('admin.batchSchedule',$b->id) }}" target="_blank" class="btn btn-primary">View</a></td>
-                                        <td><a type="button" href="" class="btn btn-info">PDF</a></td>
-                                    </tr>
+                                      </tr>
                                 @endforeach
                                 </tbody>
                             </table>

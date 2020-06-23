@@ -48,7 +48,6 @@ return [
             'driver' => 'session',
             'provider' => 'coordinators',
         ],
-
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
